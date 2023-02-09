@@ -2,6 +2,8 @@
 #include <string>
 using namespace std;
 
+static const bool DEBUG = false; // true => print debug strings
+
 // forward declaration of a method defined later
 string ArrayToString(int* array, int arraySize);
 
@@ -12,19 +14,19 @@ void SelectionSort(int* numbers, int numbersSize) {
       for (int j = i + 1; j < numbersSize; j++) {
          if (numbers[j] < numbers[indexSmallest]) {
             indexSmallest = j;
-           cout << "\tsmallest: " << numbers[j];
-           cout << " @ " << j << endl;
+           if (DEBUG) {cout << "\tsmallest: " << numbers[j];
+                       cout << " @ " << j << endl;}
          }
       }
 
       // Swap numbers[i] and numbers[indexSmallest]
-      cout << "\t\t" << "swap positions " << i;
-      cout << " and " << indexSmallest << endl;
+      if (DEBUG) {cout << "\t\t" << "swap positions " << i;
+                  cout << " and " << indexSmallest << endl;}
       int temp = numbers[i];
       numbers[i] = numbers[indexSmallest];
       numbers[indexSmallest] = temp;
       // show partially sorted array
-     cout << "\tPART_SORTED: " << ArrayToString(numbers, numbersSize) << endl;
+     if (DEBUG) {cout << "\tPART_SORTED: " << ArrayToString(numbers, numbersSize) << endl;}
    }
 }
 
