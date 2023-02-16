@@ -9,6 +9,9 @@ hardwicj
 2023/02/16
 
 */
+static int COMPARES = 0;
+static int SWAP = 0;
+const bool DEBUG = true;
 
 void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    int mergedSize = rightLast - leftFirst + 1;       // Size of merged partition
