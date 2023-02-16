@@ -6,8 +6,13 @@ using namespace std;
 CSC 249
 M3T2 - Insertion Sort
 HardwickJ
-
+2023/02/16
+- Implement basic insertion sort
+- TODO: Add instrumentation
 */
+
+static int COMPARES = 0;
+static int SWAPS = 0;
 
 void InsertionSort(int* numbers, int numbersSize) {
    for (int i = 1; i < numbersSize; i++) {
