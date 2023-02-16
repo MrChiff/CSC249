@@ -13,17 +13,31 @@ HardwickJ
 
 static int COMPARES = 0;
 static int SWAPS = 0;
+const bool DEBUG = true;
+
+// forward declaration
+string ArrayToString(int* , int);
 
 void InsertionSort(int* numbers, int numbersSize) {
    for (int i = 1; i < numbersSize; i++) {
       int j = i;
+      COMPARES++; // next line is a compare, whether true or false
       while (j > 0 && numbers[j] < numbers[j - 1]) {
+
          // Swap numbers[j] and numbers [j - 1]
+         SWAPS++;
          int temp = numbers[j];
          numbers[j] = numbers[j - 1];
          numbers[j - 1] = temp;
          j--;
+
+         if (DEBUG){
+         cout << "\t" << "swap #"<< SWAPS << ": elements " << numbers[j] << " and " << numbers[j-1] << endl;
+         cout << "\tPART_SORTED: " << ArrayToString(numbers, numbersSize) << endl;
+         cout << "\t compares so far: " << COMPARES << endl;
+         }
       }
+
    }
 }
 
@@ -60,4 +74,6 @@ int main() {
 
    // Display the sorted contents of the array
    cout << "SORTED:   " << ArrayToString(numbers, numbersSize) << endl;
+   cout << "Total swaps: " << SWAPS << endl;
+   cout << "Total compares: " << COMPARES << endl;
 }
