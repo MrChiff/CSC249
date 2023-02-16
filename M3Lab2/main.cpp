@@ -2,6 +2,14 @@
 #include <string>
 using namespace std;
 
+/*
+CSC 249
+M3Lab2 - Merge Sort
+hardwicj
+2023/02/16
+
+*/
+
 void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    int mergedSize = rightLast - leftFirst + 1;       // Size of merged partition
    int* mergedNumbers = new int[mergedSize]; // Dynamically allocates temporary
@@ -93,3 +101,4 @@ int main() {
 
    // Display the sorted contents of the array
    cout << "SORTED:   " << ArrayToString(numbers, numbersSize) << endl;
+}
