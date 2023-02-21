@@ -10,8 +10,11 @@ hardwicj
 
 */
 static int COMPARES = 0;
-static int SWAP = 0;
+static int SWAPS = 0;
+static int COMPS = 0; // any if statement comparing L' and R'
+static int COPIES = 0; // # of copy operations into a temp array
 const bool DEBUG = true;
+string ArrayToString(int* array, int arraySize);
 
 void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    int mergedSize = rightLast - leftFirst + 1;       // Size of merged partition
@@ -21,18 +24,25 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    int leftPos = leftFirst;                  // Initialize left partition position
    int rightPos = leftLast + 1;              // Initialize right partition position
 
+   if (DEBUG){
+    cout << "\tCalling Merge(" << leftFirst << ", " << leftLast << ") with (";
+    cout << leftLast+1 << ", " << rightLast << ")" << endl;
+   }
    // Add smallest element from left or right partition to merged numbers
    // while there are unsorted items left...
    while (leftPos <= leftLast && rightPos <= rightLast) {
+        COMPS++; // picking left or right counts as a comparison
       //either pick left item (if it's the smallest)
       if (numbers[leftPos] <= numbers[rightPos]) {
          mergedNumbers[mergePos] = numbers[leftPos];
          leftPos++;
+         SWAPS++;
       }
       //or pick right item (if it's the smallest)
       else {
          mergedNumbers[mergePos] = numbers[rightPos];
          rightPos++;
+         SWAPS++;
       }
       mergePos++;
    }
@@ -52,16 +62,23 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    }
 
    // Copy merged numbers back to numbers
+   // if we tracked COPY OPERATIONS, this would be COPY_OPERATIONS += mergedSIZE
+   COPIES += mergedSize;
    for (mergePos = 0; mergePos < mergedSize; mergePos++) {
       numbers[leftFirst + mergePos] = mergedNumbers[mergePos];
    }
-
+   // DEBUG: print the temp array before disposal
+   cout << "\tA': " << ArrayToString(mergedNumbers, mergedSize) << endl;
    // Free temporary array
    delete[] mergedNumbers;
 }
 
 void MergeSort(int* numbers, int startIndex, int endIndex) {
    if (startIndex < endIndex) {
+
+    if (DEBUG){
+        cout << "calling MergeSort(" << startIndex << ", " << endIndex << ")" << endl;
+    }
       // Find the midpoint in the partition
       int mid = (startIndex + endIndex) / 2;
 
@@ -71,6 +88,9 @@ void MergeSort(int* numbers, int startIndex, int endIndex) {
 
       // Merge left and right partition in sorted order
       Merge(numbers, startIndex, mid, endIndex);
+      if (DEBUG){
+        cout << "Ops so far:" << "comps = " << COMPS << " swaps=" << SWAPS << " copies=" << COPIES << endl;
+      }
    }
 }
 
