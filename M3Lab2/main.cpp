@@ -10,7 +10,7 @@ hardwicj
 
 */
 static int COMPARES = 0;
-static int SWAPS = 0;
+static int SWAPS = 0; // any time we switched fingers and swapped
 static int COMPS = 0; // any if statement comparing L' and R'
 static int COPIES = 0; // # of copy operations into a temp array
 const bool DEBUG = true;
