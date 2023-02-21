@@ -22,18 +22,21 @@ void Merge(int* numbers, int leftFirst, int leftLast, int rightLast) {
    int rightPos = leftLast + 1;              // Initialize right partition position
 
    // Add smallest element from left or right partition to merged numbers
+   // while there are unsorted items left...
    while (leftPos <= leftLast && rightPos <= rightLast) {
+      //either pick left item (if it's the smallest)
       if (numbers[leftPos] <= numbers[rightPos]) {
          mergedNumbers[mergePos] = numbers[leftPos];
          leftPos++;
       }
+      //or pick right item (if it's the smallest)
       else {
          mergedNumbers[mergePos] = numbers[rightPos];
          rightPos++;
       }
       mergePos++;
    }
-
+   // The two cases below occur if we've exhausted one side (L' or R'), no more compares needed
    // If left partition is not empty, add remaining elements to merged numbers
    while (leftPos <= leftLast) {
       mergedNumbers[mergePos] = numbers[leftPos];
