@@ -1,4 +1,5 @@
 #include <iostream>
+#include "StringNode.h"
 #include "SinglyLinkedList.h"
 using namespace std;
 
@@ -12,13 +13,34 @@ hardwicj
 
 int main() {
    LinkedList numList;
-   Node* nodeA = new Node(66);
+   /*Node* nodeA = new Node(66);
    Node* nodeB = new Node(99);
    Node* nodeC = new Node(44);
    Node* nodeD = new Node(95);
    Node* nodeE = new Node(42);
    Node* nodeF = new Node(17);
-   ///*
+*/
+  // note these are from StringNode.h
+  Node* nodeA = new Node("A");
+  Node* nodeB = new Node("B");
+  Node* nodeC = new Node("C");
+  Node* nodeD = new Node("D");
+  // LL is empty 
+  cout << "numList when empty: ";
+  numList.PrintList(cout); // print empty list
+  // Step 1 - add nodeA (list contains only nodeA)
+  numList.Append(nodeA);
+  cout << "numList after adding nodeA: ";
+  numList.PrintList(cout);
+  numList.Append(nodeB);
+  cout << "numList after adding a, b: ";
+  numList.PrintList(cout);
+
+  numList.Prepend(nodeD);
+  cout << "numList of d, a, b: ";
+  numList.PrintList(cout);
+  
+   /*
    numList.Append(nodeB);   // Add 99
    numList.Append(nodeC);   // Add 44, make the tail
    numList.Append(nodeE);   // Add 42, make the tail
@@ -39,7 +61,7 @@ int main() {
    // Output final list
    cout << "List after removing nodes: ";
    numList.PrintList(cout);
-  //*/
-
+   */
+   
    // LinkedList destructor frees remaining nodes
 }
