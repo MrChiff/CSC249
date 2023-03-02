@@ -5,8 +5,10 @@ from LinkedList import LinkedList
 CSC 249
 M4T1 - Singly Linked Lists (py)
 from Zy 4.6
+hardwicj
+23/03/02
 """
-
+# how to create Link list object
 num_list = LinkedList()
 
 node_a = Node(66)
@@ -16,7 +18,14 @@ node_d = Node(95)
 node_e = Node(42)
 node_f = Node(17)
 
-#"""
+num_list.append(node_a)
+probe = num_list.head
+while probe != None:
+    print(probe.data)
+    probe = probe.next
+print("done")
+
+"""
 num_list.append(node_b)   # Add 99
 num_list.append(node_c)   # Add 44, make the tail
 num_list.append(node_e)   # Add 42, make the tail
@@ -45,4 +54,4 @@ while node != None:
     print(node.data, end=' ')
     node = node.next
 print()
-#"""
+"""

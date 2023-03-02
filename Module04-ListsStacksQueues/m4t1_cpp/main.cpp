@@ -6,8 +6,8 @@ using namespace std;
 CSC 249
 M4T1 - Singly Linked Lists (cpp)
 template from zybooks 4.6
-your name
-today's date
+hardwicj
+23/03/02
 */
 
 int main() {
@@ -40,6 +40,6 @@ int main() {
    cout << "List after removing nodes: ";
    numList.PrintList(cout);
   //*/
-   
+
    // LinkedList destructor frees remaining nodes
 }
