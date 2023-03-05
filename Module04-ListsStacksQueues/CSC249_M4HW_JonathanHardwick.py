@@ -73,35 +73,10 @@
 
 # Questions:
     # Am I going to need to use one of the searching algorithms to find the items?
+    # I need help with the searching alg in LinkedList file.
+    # What kind of items should I put in here and how many and how much credit?
 
-
-
-#=========#
-class Node:
-#=========#
-
-    def __init__(self, initial_data):
-        self.data = initial_data
-        self.next = None
-
-#===============#
-class LinkedList:
-#===============#
-
-    def __init__(self):
-        self.head = None
-        self.tail = None
-
-#=========================#
-def append(self, new_node):
-#=========================#
-
-    if self.head == None:
-        self.head = new_node
-        self.tail = new_node
-    else:
-        self.tail.next = new_node
-        self.tail = new_node
+from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 
 #=============#
 def mainMenu():
@@ -175,6 +150,21 @@ def main():
     
         # Display the main menu to the user.
         sent = mainMenu()
+        
+        # Creating Player inventory:
+        node1 = Node("sword")
+        node2 = Node("sheild")
+        node3 = Node("boots")
+        node4 = Node("shirt")
+        node5 = Node("pants")
+        node6 = Node("potion")
+        node7 = Node("bow")
+        node8 = Node("arrows")
+        node9 = Node("llama")
+        node10 = Node("helmet")
+            
+            
+        # Creating shop inventory:
         
         #==============================#
         # OPTION 1:  Purchase an item. #
