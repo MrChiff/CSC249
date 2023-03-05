@@ -71,6 +71,38 @@
 # ==================================================================================================
 
 
+# Questions:
+    # Am I going to need to use one of the searching algorithms to find the items?
+
+
+
+#=========#
+class Node:
+#=========#
+
+    def __init__(self, initial_data):
+        self.data = initial_data
+        self.next = None
+
+#===============#
+class LinkedList:
+#===============#
+
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+#=========================#
+def append(self, new_node):
+#=========================#
+
+    if self.head == None:
+        self.head = new_node
+        self.tail = new_node
+    else:
+        self.tail.next = new_node
+        self.tail = new_node
+
 #=============#
 def mainMenu():
 #=============#
