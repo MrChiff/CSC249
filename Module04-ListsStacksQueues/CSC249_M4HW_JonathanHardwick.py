@@ -162,9 +162,30 @@ def main():
         node8 = Node("arrows")
         node9 = Node("llama")
         node10 = Node("helmet")
+        
+        playerInventory = LinkedList()
+        playerInventory.append(node1)
+        playerInventory.append(node2)
+        playerInventory.append(node3)
+        playerInventory.append(node4)
+        playerInventory.append(node5)
+        playerInventory.append(node6)
+        playerInventory.append(node7)
+        playerInventory.append(node8)
+        playerInventory.append(node9)
+        playerInventory.append(node10)
             
             
-        # Creating shop inventory:
+        # Creating shop inventory:node1 = Node("sword")
+        node2 = Node("sheild")
+        node3 = Node("boots")
+        node4 = Node("shirt")
+        node5 = Node("pants")
+        node6 = Node("potion")
+        node7 = Node("bow")
+        node8 = Node("arrows")
+        node9 = Node("llama")
+        node10 = Node("helmet")
         
         #==============================#
         # OPTION 1:  Purchase an item. #
