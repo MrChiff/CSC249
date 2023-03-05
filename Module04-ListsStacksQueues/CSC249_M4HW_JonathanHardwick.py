@@ -1,4 +1,5 @@
 # ==================================================================================================
+# CSC 249
 # M4HW
 # Jonathan Hardwick
 # 2023/03/?
@@ -37,13 +38,13 @@
 #  quantities of items. (So the player either has a potion, or they don't.)
 # -For Silver :  You do not have to handle quantities of items.
 #  
-# Requirement	Required For:
-# -Implementation in Python or C++ using linked lists	                                    Bronze
-# -Menu system that allows the player to choose from the required options	                Bronze
-# -Ability to purchase items with correct name and price	                                Bronze
-# -Ability to view the player's inventory with correct name, (quantity?), and value	    Silver
-# -Ability to sell items back to the shop with correct name and quantity	                Gold
-# -Ability to properly handle quantities of items	                                        Gold
+# Requirement	                                                                       Required For:
+# -Implementation in Python or C++ using linked lists	                               Bronze
+# -Menu system that allows the player to choose from the required options	           Bronze
+# -Ability to purchase items with correct name and price	                           Bronze
+# -Ability to view the player's inventory with correct name, (quantity?), and value	   Silver
+# -Ability to sell items back to the shop with correct name and quantity	           Gold
+# -Ability to properly handle quantities of items	                                   Gold
 # Total Points: 100
 # 
 # Notes:
@@ -68,3 +69,151 @@
 # same item are found.)
 # 
 # ==================================================================================================
+
+
+#=============#
+def mainMenu():
+#=============#
+
+    """ 
+    This function displays the main menu to the user. 
+    
+    inputs: none
+    outputs: sent (user selection/sentinel value) and displays main menu
+    """
+    
+    while True:
+        
+        # Ask the user to choose one of the options.
+        try:
+            sent = int(input("\n----------------- Menu -----------------\n"\
+                               "1) Purchase an item.\n"\
+                               "2) View inventory.\n"\
+                               "3) Sell an item.\n"\
+                               "4) View total inventory value.\n"\
+                               "5) Exit the program.\n"\
+                               "----------------------------------------\n"\
+                               "Enter your choice:\t"))
+                
+        # If the user does not enter an int, display an error message.
+        except ValueError:
+            print("\nPlease enter an appropriate choice.")
+        
+        # General error statement.
+        except:
+            print("General Error.")
+        
+        # Int input validation. 
+        else:
+            
+            # If the user's input is an integer but not and appropriate choice: 
+            if (sent > 5):
+                errorMessage()
+                mainMenu()
+            
+            # If the user's input passes the previous validation steps, break the while loop and 
+            # return "sent".
+            else:
+                break
+    
+    return sent
+
+#=================#
+def errorMessage():
+#=================#
+
+    """ 
+    This function lets the user know that the option chosen is not in the menu. 
+    
+    inputs: none
+    outputs: displays error message and the main menu
+    """
+    
+    print("\nError:  Your choice is not valid.  Please enter a corrrect value.")
+    
+#=========#
+def main():
+#=========#
+
+    # Initialize the sentinel value to zero.
+    sent = 0
+
+    # While the user wants to continue to use the program (the sentinel value is not equal to 6):
+    while sent != 5:
+    
+        # Display the main menu to the user.
+        sent = mainMenu()
+        
+        #==============================#
+        # OPTION 1:  Purchase an item. #
+        #==============================#
+        
+        # If the user chooses option 1:
+        if sent == 1:
+            
+            print("\n |==============================|"\
+                  "\n | OPTION 1:  Purchase an item. |"\
+                  "\n |==============================|")
+            
+            # Call 
+            
+        #============================#
+        # OPTION 2:  View inventory. #
+        #============================#
+        
+        # If the user chooses option 2:
+        elif sent == 2:
+            
+            print("\n |============================|"\
+                  "\n | OPTION 2:  View inventory. |"\
+                  "\n |============================|")
+                
+        #==========================#
+        # OPTION 3:  Sell an item. #
+        #==========================#
+        
+        # If the user chooses option 3:
+        elif sent == 3:
+            
+            print("\n |==========================|"\
+                  "\n | OPTION 3:  Sell an item. |"\
+                  "\n |==========================|")
+                
+        #========================================#
+        # OPTION 4:  View total inventory value. #
+        #========================================#
+        
+        # If the user chooses option 4:
+        elif sent == 4:
+            
+            print("\n |========================================|"\
+                  "\n | OPTION 4:  View total inventory value. |"\
+                  "\n |========================================|")
+            
+            
+        #==============================#
+        # OPTION 5:  Exit the program. #
+        #==============================#
+        
+        # If the user chooses option 5:
+        elif sent == 5:
+            
+            # Display a good-bye message and terminate the program.
+            print("\nExiting Program.")
+        
+        #=================#
+        # INCORRECT ENTRY #
+        #=================#
+            
+        # If the user chooses an option that is not 1-5:
+        # else: 
+            
+        #     # Display a message that tells them their entry was invalid and ask that they renter a
+        #     # correct value. This is a redundency for the input validation in the mainMenu() 
+        #     # function.
+        #     errorMessage()
+        #     mainMenu()
+
+# Call the main function.
+if __name__ == "__main__":    
+    main()
