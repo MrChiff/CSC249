@@ -87,3 +87,9 @@ class LinkedList:
             current_node = current_node.next
    
         return None
+    
+    def __repr__(self):
+        current_node = self.head 
+        while (current_node != None): 
+            return f'{current_node.data:<16}'
+            current_node = current_node.next
