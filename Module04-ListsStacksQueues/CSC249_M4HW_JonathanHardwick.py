@@ -212,7 +212,8 @@ def main():
                   "\n | OPTION 1:  Purchase an item. |"\
                   "\n |==============================|")
             
-            # Call 
+            itemName = input("What is the item that you want to purchase?\t")
+            itemPrice = input("What is the price of the item you want to purchase?\t")
             
         #============================#
         # OPTION 2:  View inventory. #
@@ -241,6 +242,9 @@ def main():
             print("\n |==========================|"\
                   "\n | OPTION 3:  Sell an item. |"\
                   "\n |==========================|")
+                
+            itemName = input("What is the item that you want to sell?\t")
+            itemQuantity = input("How many ", itemName,"s do you want to sell?\t")
                 
         #========================================#
         # OPTION 4:  View total inventory value. #
