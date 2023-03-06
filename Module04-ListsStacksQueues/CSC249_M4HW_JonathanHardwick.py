@@ -76,8 +76,10 @@
     # I need help with the searching alg in LinkedList file.
     # What kind of items should I put in here and how many and how much credit?
     # Why do I have to return a string for __repr__
+    # Should I use a dictionary or a set of lists to store the items, values, and quantity?
 
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
+import random
 
 #=============#
 def mainMenu():
@@ -146,7 +148,34 @@ def inventoryItems():
     items = ["sword", "sheild", "boots", "shirt", "pants", "potion", "bow", "arrows", "llama", \
              "helmet", "horse", "saddle", "gold", "sleeping bag", "book", "key", "apple", "jewel", \
              "axe", "bomb"]
-    return items
+        
+    prices = [8, 5, 3, 5, 6, 2, 4, 1, 300, 7, 100, 30, 50, 10, 3, 6, 2, 25, 10, 3]
+    
+    shop_quantities = []
+    for i in range(len(prices)):
+        shop_quantities.append(random.randint(1,10))
+        
+    player_quantities = []
+    for i in range(10):
+        player_quantities.append(random.randint(1,10))
+    
+    itemDict = {"sword":8, "sheild":5, "boots":3, "shirt":5, "pants":(6,5), "potion":2, "bow":4, \
+                "arrows":1, "llama":300, "helmet":7, "horse":100, "saddle":30, "gold":50, \
+                "sleeping bag":10, "book":3, "key":6, "apple":2, "jewel":25, "axe":10, "bomb":3}
+        
+    shopDict = {}
+    for i in range(len(items)):
+        shopDict[items[i]] = (prices[i], shop_quantities[i])
+        
+    playerDict = {}
+    for i in range(10):
+        playerDict[items[i]] = (prices[i], player_quantities[i])
+    
+    # Displays the keys of the dictionary
+    # print(itemDict.keys())
+    # print(itemDict.values())
+    
+    return (items, prices, shop_quantities, player_quantities)
 
 #====================#
 def playerInventory():
@@ -211,9 +240,17 @@ def main():
             print("\n |==============================|"\
                   "\n | OPTION 1:  Purchase an item. |"\
                   "\n |==============================|")
+                
+            print("Shop Inventory:\n", shop_inventory)
             
             itemName = input("What is the item that you want to purchase?\t")
             itemPrice = input("What is the price of the item you want to purchase?\t")
+            
+            # TODO:
+                # Add item to player inventory 
+                # Subtract value from player money (how much money to start with?)
+                # Add prices to inventory items.
+                 
             
         #============================#
         # OPTION 2:  View inventory. #
@@ -229,8 +266,9 @@ def main():
             print("Player Inventory")
             print(player_inventory)
             
-            print("\nShop Inventory:")
-            print(shop_inventory)
+            # TODO:
+                # talley the number of each item to show
+            
                 
         #==========================#
         # OPTION 3:  Sell an item. #
