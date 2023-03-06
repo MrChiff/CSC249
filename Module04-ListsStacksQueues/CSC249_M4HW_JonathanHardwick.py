@@ -241,39 +241,51 @@ def main():
         
         # If the user chooses option 1:
         if sent == 1:
-            
-            print("\n |==============================|"\
-                  "\n | OPTION 1:  Purchase an item. |"\
-                  "\n |==============================|")
+            cont = 1
+            while cont != 2:
+                print("\n |==============================|"\
+                      "\n | OPTION 1:  Purchase an item. |"\
+                      "\n |==============================|")
+                    
+                print("\nShop Inventory:")
+                print(shop_inventory)
                 
-            print("\nShop Inventory:")
-            print(shop_inventory)
-            
-            itemName = input("What is the item that you want to purchase?\t")
-            # print(itemName)
-            reqPrice = input("What is the price of the" + itemName + " you want to purchase?\t")
-            
-            # TODO:
-                # Add item to player inventory 
-                # Subtract value from player money (how much money to start with?)
-                # Add prices to inventory items.
-                # print updated shop inventory
+                itemName = input("What is the item that you want to purchase?\t")
+                # print(itemName)
+                reqPrice = int(input("What is the price of the " + itemName + " you want to purchase?\t"))
                 
-            # Verify the item exists in the shop inventory.
-            
-            # Subtract price from player's money.
-            # !!!!!!Consider adding this as a class (review 221)
-            player_money = player_money - reqPrice
-            
-            
-            # print("Player Inventory before addition:")
-            # print(player_inventory)
+                # TODO:
+                    # Add item to player inventory 
+                    # Subtract value from player money (how much money to start with?)
+                    # Add prices to inventory items.
+                    # print updated shop inventory
+                    
+                # Verify the item exists in the shop inventory.
+                if (shop_inventory.ListSearch(itemName).price == reqPrice):
+                    print("\n" + itemName.capitalize() + " found!")
                 
-            # Add new item to player's inventory.
-            player_inventory.append(Node(itemName, reqPrice))
-                 
-            print("\nPlayer Inventory:")
-            print(player_inventory)
+                    # Subtract price from player's money.
+                    # !!!!!!Consider adding this as a class (review 221)
+                    player_money = player_money - reqPrice
+                    
+                    
+                    # print("Player Inventory before addition:")
+                    # print(player_inventory)
+                        
+                    # Add new item to player's inventory.
+                    player_inventory.append(Node(itemName, reqPrice))
+                         
+                    print("\nPlayer Inventory:")
+                    print(player_inventory)
+                
+                else:
+                    print("\n" + itemName.capitalize() + " not found! Try again!")
+                
+                # Asking the player if he wants to purchase another item
+                # Add exception handling 
+                cont = input("Do you want to purchase another item?\n" + \
+                             "1) Yes\n" + \
+                             "2) No\n")
             
         #============================#
         # OPTION 2:  View inventory. #

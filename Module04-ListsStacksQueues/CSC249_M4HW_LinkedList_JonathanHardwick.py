@@ -89,16 +89,16 @@ class LinkedList:
     def ListSearch(self, key):
         current_node = self.head 
         while (current_node != None): 
-            if (current_node.data == key): 
+            if (current_node.item == key): 
                 return current_node
-      
+            print(current_node)
             current_node = current_node.next
    
         return None
     
     def __repr__(self):
         current_node = self.head 
-        print("------------------")
+        print("----------------------")
         print(f'{"ITEM:":<16}{"PRICE:":<16}')
         print(f'{"-----":<16}{"------":<16}')
         while (current_node != None): 
@@ -107,5 +107,5 @@ class LinkedList:
             # if (current_node.next == None):
             #     break
         if (current_node == None):
-            return "------------------"
+            return "----------------------\n"
 
