@@ -259,7 +259,7 @@ def main():
                     
                     while True:
                         try:
-                           reqPrice = int(input("What is the price of the " + itemName + " you want to purchase?\t"))
+                           reqPrice = int(input("\nWhat is the price of the " + itemName + " you want to purchase?\t"))
                         
                         # If the user does not enter an int, display an error message.
                         except ValueError:
