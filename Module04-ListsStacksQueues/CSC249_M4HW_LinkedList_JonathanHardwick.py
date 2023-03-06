@@ -75,16 +75,6 @@ class LinkedList:
             current_node.next = succeeding_node
             if succeeding_node == None: # Remove tail
                 self.tail = current_node
-                
-    # ListSearch(list, key):
-    #     current_node = list⇢head 
-    #     while (current_node != None): 
-    #         if (current_node⇢data == key): 
-    #             return current_node
-      
-    #         current_node = curNode⇢next
-   
-    #     return null
     
     def ListSearch(self, key):
         current_node = self.head 
