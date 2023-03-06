@@ -226,8 +226,10 @@ def main():
                   "\n |============================|\n")
                 
             print("Player Inventory")
-                
             print(player_inventory)
+            
+            print("\nShop Inventory:")
+            print(shop_inventory)
                 
         #==========================#
         # OPTION 3:  Sell an item. #
