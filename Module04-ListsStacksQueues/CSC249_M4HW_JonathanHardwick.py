@@ -266,7 +266,7 @@ def main():
                         # print updated shop inventory
                         
                     # Verify the item exists in the shop inventory.
-                    if (shop_inventory.ListSearch(itemName).price == reqPrice):
+                    if (shop_inventory.ListSearch(itemName) == reqPrice):
                         # print("\n" + itemName.capitalize() + " found!")
                     
                         # Subtract price from player's money.
