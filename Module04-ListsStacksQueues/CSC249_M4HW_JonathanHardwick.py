@@ -77,6 +77,9 @@
     # What kind of items should I put in here and how many and how much credit?
     # Why do I have to return a string for __repr__
     # Should I use a dictionary or a set of lists to store the items, values, and quantity?
+    # How to setup item, price and quantity in the Node class?  (individual vars, tuple, dictionary)
+    # Do I need to add a while loop around each option in order to keep doing it until the player 
+    #   opts out?
 
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 import random
@@ -175,7 +178,8 @@ def inventoryItems():
     # print(itemDict.keys())
     # print(itemDict.values())
     
-    return (items, prices, shop_quantities, player_quantities)
+    # return (items, prices, shop_quantities, player_quantities)
+    return (items, prices)#, shop_quantities, player_quantities)
 
 #====================#
 def playerInventory():
@@ -186,9 +190,9 @@ def playerInventory():
     """
     
     player_inventory = LinkedList()
-    items = inventoryItems()
+    items, prices = inventoryItems()
     for i in range(10):
-        player_inventory.append(Node(items[i]))
+        player_inventory.append(Node(items[i], prices[i]))
     
     return player_inventory
 
@@ -201,9 +205,9 @@ def shopInventory():
     """
 
     shop_inventory = LinkedList()
-    items = inventoryItems()
-    for item in items:
-        shop_inventory.append(Node(item))
+    items, prices = inventoryItems()
+    for i in range(len(items)):
+        shop_inventory.append(Node(items[i], prices[i]))
     
     return shop_inventory
 
@@ -239,18 +243,22 @@ def main():
             
             print("\n |==============================|"\
                   "\n | OPTION 1:  Purchase an item. |"\
-                  "\n |==============================|")
+                  "\n |==============================|\n")
                 
-            print("Shop Inventory:\n", shop_inventory)
+            print("Shop Inventory:\n")
+            print(shop_inventory)
             
             itemName = input("What is the item that you want to purchase?\t")
-            itemPrice = input("What is the price of the item you want to purchase?\t")
+            itemPrice = input("What is the price of the", itemName, " you want to purchase?\t")
             
             # TODO:
                 # Add item to player inventory 
                 # Subtract value from player money (how much money to start with?)
                 # Add prices to inventory items.
+                # print updated shop inventory
                  
+            print("Player Inventory:\n")
+            print(player_inventory)
             
         #============================#
         # OPTION 2:  View inventory. #

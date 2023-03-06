@@ -8,15 +8,16 @@ class Node:
     This class creates a Node of any type. 
     """
 
-    def __init__(self, initial_data):
-        self.data = initial_data
+    def __init__(self, item="", price=0):
+        self.item = item
+        self.price = price
         self.next = None
         # print(initial_data)
         # print(self.data)
         
     def __str__(self):
         # return f'{self.data:<16}{self.next:<16}'
-        return f'{self.data:<16}'
+        return f'{self.item:<16}{self.price:<16}'
         # print(self.data)
 
 #===============#
@@ -97,12 +98,14 @@ class LinkedList:
     
     def __repr__(self):
         current_node = self.head 
-        print("-------------")
+        print("------------------")
+        print(f'{"ITEM:":<16}{"PRICE:":<16}')
+        print(f'{"-----":<16}{"------":<16}')
         while (current_node != None): 
-            print(f'{current_node.data:<16}')
+            print(f'{current_node.item:<16}{current_node.price:<16}')
             current_node = current_node.next
             # if (current_node.next == None):
             #     break
         if (current_node == None):
-            return "-------------"
+            return "------------------"
 
