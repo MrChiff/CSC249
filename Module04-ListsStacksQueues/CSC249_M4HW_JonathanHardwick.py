@@ -75,6 +75,7 @@
     # Am I going to need to use one of the searching algorithms to find the items?
     # I need help with the searching alg in LinkedList file.
     # What kind of items should I put in here and how many and how much credit?
+    # Why do I have to return a string for __repr__
 
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 
@@ -260,7 +261,11 @@ def main():
             
             print("\n |============================|"\
                   "\n | OPTION 2:  View inventory. |"\
-                  "\n |============================|")
+                  "\n |============================|\n")
+                
+            print("Player Inventory")
+                
+            print(player_inventory)
                 
         #==========================#
         # OPTION 3:  Sell an item. #

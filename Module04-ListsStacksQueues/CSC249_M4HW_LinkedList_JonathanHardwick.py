@@ -11,6 +11,13 @@ class Node:
     def __init__(self, initial_data):
         self.data = initial_data
         self.next = None
+        # print(initial_data)
+        # print(self.data)
+        
+    def __str__(self):
+        # return f'{self.data:<16}{self.next:<16}'
+        return f'{self.data:<16}'
+        # print(self.data)
 
 #===============#
 class LinkedList:
@@ -90,6 +97,12 @@ class LinkedList:
     
     def __repr__(self):
         current_node = self.head 
+        print("-------------")
         while (current_node != None): 
-            return f'{current_node.data:<16}'
+            print(f'{current_node.data:<16}')
             current_node = current_node.next
+            # if (current_node.next == None):
+            #     break
+        if (current_node == None):
+            return "-------------"
+
