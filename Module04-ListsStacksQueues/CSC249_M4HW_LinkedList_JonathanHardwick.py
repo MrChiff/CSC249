@@ -91,10 +91,11 @@ class LinkedList:
         while (current_node != None): 
             if (current_node.item == key): 
                 return current_node
-            print(current_node)
+            # print(current_node)
             current_node = current_node.next
    
-        return None
+        if (current_node == None):
+            return -1
     
     def __repr__(self):
         current_node = self.head 
