@@ -229,6 +229,7 @@ def main():
         
         # Creating Player inventory:
         player_inventory = playerInventory()
+        player_money = 900
             
             
         # Creating shop inventory:
@@ -243,21 +244,35 @@ def main():
             
             print("\n |==============================|"\
                   "\n | OPTION 1:  Purchase an item. |"\
-                  "\n |==============================|\n")
+                  "\n |==============================|")
                 
-            print("Shop Inventory:\n")
+            print("\nShop Inventory:")
             print(shop_inventory)
             
             itemName = input("What is the item that you want to purchase?\t")
-            itemPrice = input("What is the price of the", itemName, " you want to purchase?\t")
+            # print(itemName)
+            reqPrice = input("What is the price of the" + itemName + " you want to purchase?\t")
             
             # TODO:
                 # Add item to player inventory 
                 # Subtract value from player money (how much money to start with?)
                 # Add prices to inventory items.
                 # print updated shop inventory
+                
+            # Verify the item exists in the shop inventory.
+            
+            # Subtract price from player's money.
+            # !!!!!!Consider adding this as a class (review 221)
+            player_money = player_money - reqPrice
+            
+            
+            # print("Player Inventory before addition:")
+            # print(player_inventory)
+                
+            # Add new item to player's inventory.
+            player_inventory.append(Node(itemName, reqPrice))
                  
-            print("Player Inventory:\n")
+            print("\nPlayer Inventory:")
             print(player_inventory)
             
         #============================#
