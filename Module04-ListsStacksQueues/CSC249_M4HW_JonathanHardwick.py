@@ -256,8 +256,22 @@ def main():
                     itemName = itemName.strip()
                     if itemName == "cancel":
                         break
-                    # print(itemName)
-                    reqPrice = int(input("What is the price of the " + itemName + " you want to purchase?\t"))
+                    
+                    while True:
+                        try:
+                           reqPrice = int(input("What is the price of the " + itemName + " you want to purchase?\t"))
+                        
+                        # If the user does not enter an int, display an error message.
+                        except ValueError:
+                            
+                            print("\nPlease input a valid integer value.")
+                        
+                        # Catch-all general error.
+                        except:
+                            print("\nGeneral Error.")
+                            
+                        else:
+                            break
                     
                     # TODO:
                         # Add item to player inventory 
@@ -308,6 +322,8 @@ def main():
                         
                     else:
                         break
+                    
+                    
             
         #============================#
         # OPTION 2:  View inventory. #
