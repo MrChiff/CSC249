@@ -138,7 +138,16 @@ def errorMessage():
     """
     
     print("\nError:  Your choice is not valid.  Please enter a corrrect value.")
+
+#===================#    
+def inventoryItems():
+#===================#
     
+    items = ["sword", "sheild", "boots", "shirt", "pants", "potion", "bow", "arrows", "llama", \
+             "helmet", "horse", "saddle", "gold", "sleeping bag", "book", "key", "apple", "jewel", \
+             "axe", "bomb"]
+    return items
+
 #====================#
 def playerInventory():
 #====================#    
@@ -146,29 +155,11 @@ def playerInventory():
     """
     This function creates the player's inventory.
     """
-
-    node1 = Node("sword")
-    node2 = Node("sheild")
-    node3 = Node("boots")
-    node4 = Node("shirt")
-    node5 = Node("pants")
-    node6 = Node("potion")
-    node7 = Node("bow")
-    node8 = Node("arrows")
-    node9 = Node("llama")
-    node10 = Node("helmet")
     
     player_inventory = LinkedList()
-    player_inventory.append(node1)
-    player_inventory.append(node2)
-    player_inventory.append(node3)
-    player_inventory.append(node4)
-    player_inventory.append(node5)
-    player_inventory.append(node6)
-    player_inventory.append(node7)
-    player_inventory.append(node8)
-    player_inventory.append(node9)
-    player_inventory.append(node10)
+    items = inventoryItems()
+    for i in range(10):
+        player_inventory.append(Node(items[i]))
     
     return player_inventory
 
@@ -180,39 +171,10 @@ def shopInventory():
     This function creates the shop's inventory.
     """
 
-    node1 = Node("sword")
-    node2 = Node("sheild")
-    node3 = Node("boots")
-    node4 = Node("shirt")
-    node5 = Node("pants")
-    node6 = Node("potion")
-    node7 = Node("bow")
-    node8 = Node("arrows")
-    node9 = Node("llama")
-    node10 = Node("helmet")
-    node11 = Node("horse")
-    node12 = Node("saddle")
-    node13 = Node("gold")
-    node14 = Node("sleeping bag")
-    node15 = Node("book")
-    node16 = Node("key")
-    node17 = Node("apple")
-    node18 = Node("jewel")
-    node19 = Node("axe")
-    node20 = Node("bomb")
-    
-    
     shop_inventory = LinkedList()
-    shop_inventory.append(node1)
-    shop_inventory.append(node2)
-    shop_inventory.append(node3)
-    shop_inventory.append(node4)
-    shop_inventory.append(node5)
-    shop_inventory.append(node6)
-    shop_inventory.append(node7)
-    shop_inventory.append(node8)
-    shop_inventory.append(node9)
-    shop_inventory.append(node10)
+    items = inventoryItems()
+    for item in items:
+        shop_inventory.append(Node(item))
     
     return shop_inventory
 
