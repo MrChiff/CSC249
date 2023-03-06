@@ -280,6 +280,13 @@ def main():
                         # print updated shop inventory
                         
                     # Verify the item exists in the shop inventory.
+                    # !!!!!!!!! Thoughts:  This way I can pass the entire Node() with all values and 
+                    # then choose the value I want when using ListSearch()
+                    # if shop_inventory.ListSearch(itemName) == None:
+                        # print(product not found. Try again.)
+                    # elif shop_inventory.ListSearch(itemName) == reqPrice:
+                        # item found and subtract money and add to player inventory
+                        
                     if (shop_inventory.ListSearch(itemName) == reqPrice):
                         # print("\n" + itemName.capitalize() + " found!")
                     
