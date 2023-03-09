@@ -8,8 +8,20 @@ used by main.cpp
 
 #include <iostream>
 
-/*
-class Node {
+class Node { 
+public:
+	Data data; // what is Data class?... its the right data
+	// imagine Data as a polymorphic variable which contains 
+	// any type you want it to container
+	Node* next;
+
+   Node(int initialData) {
+      data = initialData;
+      next = nullptr;
+   }
+};
+
+class IntNode {
 public:
    int data;
    Node* next;
@@ -19,7 +31,18 @@ public:
       next = nullptr;
    }
 };
-*/
+
+class StringNode {
+public:
+   int data;
+   Node* next;
+
+   Node(int initialData) {
+      data = initialData;
+      next = nullptr;
+   }
+};
+
 class LinkedList {
 private:
    Node* head;

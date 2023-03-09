@@ -171,9 +171,8 @@ public:
       }
       printStream << std::endl;
    }
-
-   /*
-   void InsertAfter(Node* currentNode, Node* newNode) {
+  
+   void InsertAfter(Node<T>* currentNode, Node<T>* newNode) {
       if (head == nullptr) {
          head = newNode;
          tail = newNode;
@@ -187,12 +186,12 @@ public:
          currentNode->next = newNode;
       }
    }
-   */
-   /*
-   void RemoveAfter(Node* currentNode) {
+   
+   
+   void RemoveAfter(Node<T>* currentNode) {
       if (currentNode == nullptr && head) {
          // Special case: remove head
-         Node* nodeBeingRemoved = head;
+         Node<T>* nodeBeingRemoved = head;
          head = head->next;
          delete nodeBeingRemoved;
          
@@ -202,8 +201,8 @@ public:
          }
       }
       else if (currentNode->next) {
-         Node* nodeBeingRemoved = currentNode->next;
-         Node* succeedingNode = currentNode->next->next;
+         Node<T>* nodeBeingRemoved = currentNode->next;
+         Node<T>* succeedingNode = currentNode->next->next;
          currentNode->next = succeedingNode;
          delete nodeBeingRemoved;
          if (succeedingNode == nullptr) {
@@ -212,7 +211,6 @@ public:
          }
       }
    }
-*/
 };
 
 

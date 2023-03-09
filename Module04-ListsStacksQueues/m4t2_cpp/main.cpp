@@ -1,5 +1,6 @@
 #include <iostream>
-#include "SinglyLinkedList.h"
+// #include "SinglyLinkedList.h"
+#include "DoublyLinkedList.h"
 using namespace std;
 
 /*
@@ -26,18 +27,21 @@ int main() {
    numList.Append(nodeE);   // Add 42, make the tail
 
    numList.Prepend(nodeA);  // Add 66, make the head
+   cout << "list of abce: ";
+  numList.PrintList(cout);
 
-   // TODO: finish adding template to insertafter/removeafter
-   //numList.InsertAfter(nodeC, nodeD);  // Insert 95 after 44
-   //numList.InsertAfter(nodeE, nodeF);  // Insert 17 after tail (42)
+   numList.InsertAfter(nodeC, nodeD);  // Insert 95 after 44
+   numList.InsertAfter(nodeE, nodeF);  // Insert 17 after tail (42)
 
    // Output list
    cout << "List after adding nodes: ";
    numList.PrintList(cout);
 
    // Remove the tail node, then the head node
-   //numList.RemoveAfter(nodeE);
-   //numList.RemoveAfter(nullptr);
+   numList.Remove(nodeF);
+   numList.Remove(nodeA); 
+   // remove 44 from the middle
+   numList.Remove(nodeC);
 
    // Output final list
    cout << "List after removing nodes: ";
@@ -51,9 +55,19 @@ int main() {
   LinkedList<string> strList;
   Node<string>* node_a = new Node<string>("a");
   Node<string>* node_b = new Node<string>("b");
+  Node<string>* node_c = new Node<string>("c");
+  Node<string>* node_d = new Node<string>("d");
   strList.Append(node_a);
   strList.Append(node_b);
-  cout << "list of two string nodes:";
+  cout << "list of two string nodes: ";
+  strList.PrintList(cout);
+
+  strList.InsertAfter(node_a, node_c);
+  cout << "then adding c after a and d after b: ";
+  strList.InsertAfter(node_b, node_d);
+  strList.PrintList(cout);
+  cout << "then remove node c: ";
+  strList.Remove(node_c);
   strList.PrintList(cout);
   
 }
