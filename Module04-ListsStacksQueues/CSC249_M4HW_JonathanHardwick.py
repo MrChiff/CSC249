@@ -178,7 +178,7 @@ def playerInventory():
     """
     
     player_inventory = LinkedList()
-    items, prices, quant = inventoryItems()
+    items, prices = inventoryItems()
     player_quantities = []
     for i in range(10):
         player_quantities.append(random.randint(1,10))
@@ -363,8 +363,10 @@ def main():
                   "\n | OPTION 3:  Sell an item. |"\
                   "\n |==========================|")
                 
-            itemName = input("What is the item that you want to sell?\t")
-            itemQuantity = input("How many ", itemName,"s do you want to sell?\t")
+            itemName = input("\nWhat is the item that you want to sell?\t")
+            itemQuantity = int(input("How many ", itemName,"s do you want to sell?\t"))
+            
+            print("You want to sell " + str(itemQuantity) + " " + itemName + "s.")
                 
         #========================================#
         # OPTION 4:  View total inventory value. #
