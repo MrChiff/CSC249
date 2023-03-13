@@ -259,7 +259,8 @@ def main():
                     
                     while True:
                         try:
-                           reqPrice = int(input("\nWhat is the price of the " + itemName + " you want to purchase?\t"))
+                           reqPrice = int(input("\nWhat is the price of the " + itemName + \
+                                                " you want to purchase?\t"))
                         
                         # If the user does not enter an int, display an error message.
                         except ValueError:
@@ -274,10 +275,8 @@ def main():
                             break
                     
                     # TODO:
-                        # Add item to player inventory 
                         # Subtract value from player money (how much money to start with?)
-                        # Add prices to inventory items.
-                        # print updated shop inventory
+                        # print updated shop inventory (remove node and then add updated node)
                         
                     # Verify the item exists in the shop inventory.
                     # !!!!!!!!! Thoughts:  This way I can pass the entire Node() with all values and 
