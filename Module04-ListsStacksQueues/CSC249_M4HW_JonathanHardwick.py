@@ -281,13 +281,25 @@ def main():
                         # Subtract value from player money (how much money to start with?)
                         # print updated shop inventory (remove node and then add updated node)
                         
-                    # Verify the item exists in the shop inventory.
                     # !!!!!!!!! Thoughts:  This way I can pass the entire Node() with all values and 
                     # then choose the value I want when using ListSearch()
                     # if shop_inventory.ListSearch(itemName) == None:
-                        # print(product not found. Try again.)
+                    #     print("Testing statement for new if-elif statement.  Product not found. Try again.")
+                        
                     # elif shop_inventory.ListSearch(itemName) == reqPrice:
-                        # item found and subtract money and add to player inventory
+                    # #    item found and subtract money and add to player inventory
+                    #     print("Testing statement for new if-elif statement.  Product found!!!!")
+                        
+                    #     # Subtract price from player's money.
+                    #     # !!!!!!Consider adding this as a class (review 221)
+                    #     player_money = player_money - reqPrice
+                        
+                    #     # Add new item to player's inventory.
+                    #     player_inventory.append(Node(itemName, reqPrice))
+                             
+                    #     print("\nPlayer's Updated Inventory:")
+                    #     print(player_inventory)
+                    #     break
                         
                     if (shop_inventory.ListSearch(itemName) == reqPrice):
                         # print("\n" + itemName.capitalize() + " found!")
