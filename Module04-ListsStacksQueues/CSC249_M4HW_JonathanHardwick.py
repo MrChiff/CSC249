@@ -376,7 +376,7 @@ def main():
                   "\n |==========================|")
                 
             itemName = input("\nWhat is the item that you want to sell?\t")
-            itemQuantity = int(input("How many ", itemName,"s do you want to sell?\t"))
+            itemQuantity = int(input("How many " + itemName + "s do you want to sell?\t"))
             
             print("You want to sell " + str(itemQuantity) + " " + itemName + "s.")
                 
