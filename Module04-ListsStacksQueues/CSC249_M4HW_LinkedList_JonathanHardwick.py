@@ -87,6 +87,7 @@ class LinkedList:
             self.tail = predecessor_node
     
     def ListSearch(self, key):
+        
         current_node = self.head # start at head
         
         while (current_node != None): 
@@ -98,6 +99,7 @@ class LinkedList:
         return None
     
     def inventoryValue(self):
+        
         current_node = self.head 
         total = 0
         while (current_node != None): 
@@ -107,6 +109,7 @@ class LinkedList:
         return total
     
     def __repr__(self):
+        
         current_node = self.head 
         print("-"*48 + "\n")
         print(f'{"ITEM:":<16}{"PRICE:":<16}{"QUANTITY:":<16}')
