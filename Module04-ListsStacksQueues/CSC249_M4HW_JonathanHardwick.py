@@ -2,7 +2,7 @@
 # CSC 249
 # M4HW
 # Jonathan Hardwick
-# 2023/03/?
+# 2023/03/19
 # 
 # In the previous Lab assignments, we created a few classes (Nodes, LinkedLists, and Items) and 
 # confirmed that they work as expected.
@@ -72,14 +72,7 @@
 
 
 # Questions:
-    # Am I going to need to use one of the searching algorithms to find the items?
-    # I need help with the searching alg in LinkedList file.
-    # What kind of items should I put in here and how many and how much credit?
     # Why do I have to return a string for __repr__
-    # Should I use a dictionary or a set of lists to store the items, values, and quantity?
-    # How to setup item, price and quantity in the Node class?  (individual vars, tuple, dictionary)
-    # Do I need to add a while loop around each option in order to keep doing it until the player 
-    #   opts out?
 
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 import random
@@ -154,25 +147,20 @@ def inventoryItems():
         
     prices = [8, 5, 3, 5, 6, 2, 4, 1, 300, 7, 100, 30, 50, 10, 3, 6, 2, 25, 10, 3]
     
-    shop_quantities = []
-    for i in range(len(prices)):
-        shop_quantities.append(random.randint(1,10))
         
-    player_quantities = []
-    for i in range(10):
-        player_quantities.append(random.randint(1,10))
     
-    itemDict = {"sword":8, "sheild":5, "boots":3, "shirt":5, "pants":(6,5), "potion":2, "bow":4, \
-                "arrows":1, "llama":300, "helmet":7, "horse":100, "saddle":30, "gold":50, \
-                "sleeping bag":10, "book":3, "key":6, "apple":2, "jewel":25, "axe":10, "bomb":3}
+    
+    # itemDict = {"sword":8, "sheild":5, "boots":3, "shirt":5, "pants":(6,5), "potion":2, "bow":4, \
+    #             "arrows":1, "llama":300, "helmet":7, "horse":100, "saddle":30, "gold":50, \
+    #             "sleeping bag":10, "book":3, "key":6, "apple":2, "jewel":25, "axe":10, "bomb":3}
         
-    shopDict = {}
-    for i in range(len(items)):
-        shopDict[items[i]] = (prices[i], shop_quantities[i])
+    # shopDict = {}
+    # for i in range(len(items)):
+    #     shopDict[items[i]] = (prices[i], shop_quantities[i])
         
-    playerDict = {}
-    for i in range(10):
-        playerDict[items[i]] = (prices[i], player_quantities[i])
+    # playerDict = {}
+    # for i in range(10):
+    #     playerDict[items[i]] = (prices[i], player_quantities[i])
     
     # Displays the keys of the dictionary
     # print(itemDict.keys())
@@ -190,9 +178,13 @@ def playerInventory():
     """
     
     player_inventory = LinkedList()
-    items, prices = inventoryItems()
+    items, prices, quant = inventoryItems()
+    player_quantities = []
     for i in range(10):
-        player_inventory.append(Node(items[i], prices[i]))
+        player_quantities.append(random.randint(1,10))
+    
+    for i in range(10):
+        player_inventory.append(Node(items[i], prices[i], player_quantities[i]))
     
     return player_inventory
 
@@ -206,8 +198,12 @@ def shopInventory():
 
     shop_inventory = LinkedList()
     items, prices = inventoryItems()
+    shop_quantities = []
+    for i in range(len(prices)):
+        shop_quantities.append(random.randint(1,10))
+    
     for i in range(len(items)):
-        shop_inventory.append(Node(items[i], prices[i]))
+        shop_inventory.append(Node(items[i], prices[i], shop_quantities[i]))
     
     return shop_inventory
 
