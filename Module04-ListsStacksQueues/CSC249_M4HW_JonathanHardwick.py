@@ -380,6 +380,9 @@ def main():
             print("\n |========================================|"\
                   "\n | OPTION 4:  View total inventory value. |"\
                   "\n |========================================|")
+                
+            print("Player Inventory")
+            print(player_inventory)
             
             
         #==============================#
