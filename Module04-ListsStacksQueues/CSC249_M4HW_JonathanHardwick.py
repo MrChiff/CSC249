@@ -220,20 +220,27 @@ def main():
 
     # Initialize the sentinel value to zero.
     sent = 0
+    
+    # Thoughts: !!!!!!!!!!!
+    # could save the player/shop inventory by saving to a file and reading in the file at the start 
+    # of the program.
+    # if file exists:
+    #   read in file contents
+    # else:
+    #   initialize player/shop inventory with the playerInventory() and shopInventory() functions
+        
+    # Creating Player inventory:
+    player_inventory = playerInventory()
+    player_money = 900
+    
+    # Creating shop inventory:
+    shop_inventory = shopInventory()
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 6):
     while sent != 5:
     
         # Display the main menu to the user.
         sent = mainMenu()
-        
-        # Creating Player inventory:
-        player_inventory = playerInventory()
-        player_money = 900
-            
-            
-        # Creating shop inventory:
-        shop_inventory = shopInventory()
         
         #==============================#
         # OPTION 1:  Purchase an item. #
@@ -300,7 +307,7 @@ def main():
                         # Add new item to player's inventory.
                         player_inventory.append(Node(itemName, reqPrice))
                              
-                        print("\nPlayer Inventory:")
+                        print("\nPlayer's Updated Inventory:")
                         print(player_inventory)
                         break
                     
