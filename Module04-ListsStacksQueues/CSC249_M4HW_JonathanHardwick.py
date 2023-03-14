@@ -268,9 +268,11 @@ def main():
                     # to use the components of the Node() class.
                     purchase = shop_inventory.ListSearch(itemName)
                     
+                    # Check to see if the item is in the shop inventory
                     if (purchase):
-                        print("\n" + itemName.capitalize() + " found!")
-                        print(purchase)
+                        print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
+                              + str(purchase.quant) + ")")
+                        # print(purchase)
                     
                         # Subtract price from player's money.
                         # !!!!!!Consider adding this as a class (review 221)
@@ -283,12 +285,14 @@ def main():
                         # Does the player already have this item?
                         itemInInventory = player_inventory.ListSearch(itemName)
                         
+                        # Updating player inventory.
                         # If the same type of item already exists in the player inventory:
                         if itemInInventory:
                             # Increase the quantity of the item in the inventory
                             # newQuant = itemInInventory.quant + 1
                             newNode = Node(itemInInventory.item, itemInInventory.price, itemInInventory.quant + 1)
                             player_inventory.insert_after(itemInInventory.prev, newNode)
+                            player_inventory.remove(itemInInventory)
                             
                         # If the item is not in the player inventory:
                         else:    
