@@ -260,22 +260,24 @@ def main():
                     if itemName == "cancel":
                         break
                     
-                    while True:
-                        try:
-                           reqPrice = int(input("\nWhat is the price of the " + itemName + \
-                                                " you want to purchase?\t"))
+                    # Don't have to have the user state the price.
+                    #
+                    # while True:
+                    #     try:
+                    #        reqPrice = int(input("\nWhat is the price of the " + itemName + \
+                    #                             " you want to purchase?\t"))
                         
-                        # If the user does not enter an int, display an error message.
-                        except ValueError:
+                    #     # If the user does not enter an int, display an error message.
+                    #     except ValueError:
                             
-                            print("\nPlease input a valid integer value.")
+                    #         print("\nPlease input a valid integer value.")
                         
-                        # Catch-all general error.
-                        except:
-                            print("\nGeneral Error.")
+                    #     # Catch-all general error.
+                    #     except:
+                    #         print("\nGeneral Error.")
                             
-                        else:
-                            break
+                    #     else:
+                    #         break
                     
                     # TODO:
                         # print updated shop inventory (remove node and then add updated node)
@@ -299,20 +301,25 @@ def main():
                     #     print("\nPlayer's Updated Inventory:")
                     #     print(player_inventory)
                     #     break
-                        
-                    if (shop_inventory.ListSearch(itemName) == reqPrice):
-                        # print("\n" + itemName.capitalize() + " found!")
+                    
+                    # Assigns the node with the matching name to a new variable to make it shorter
+                    # to use the components of the Node() class.
+                    newNode = shop_inventory.ListSearch(itemName)
+                    
+                    if (newNode):
+                        print("\n" + itemName.capitalize() + " found!")
+                        print(newNode)
                     
                         # Subtract price from player's money.
                         # !!!!!!Consider adding this as a class (review 221)
-                        player_money = player_money - reqPrice
+                        player_money = player_money - newNode.price
                         
                         
                         # print("Player Inventory before addition:")
                         # print(player_inventory)
                             
                         # Add new item to player's inventory.
-                        player_inventory.append(Node(itemName, reqPrice))
+                        player_inventory.append(Node(newNode.item, newNode.price, 1))
                              
                         print("\nPlayer's Updated Inventory:")
                         print(player_inventory)

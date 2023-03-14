@@ -19,7 +19,7 @@ class Node:
         
     def __str__(self):
         # return f'{self.data:<16}{self.next:<16}'
-        return f'{self.item:<16}{self.price:<16}'
+        return f'{self.item:<16}{self.price:<16}{self.quant:<16}'
         # print(self.data)
 
 #===============#
@@ -71,6 +71,7 @@ class LinkedList:
             successor_node.prev = new_node
     
     def remove(self, current_node):
+        
         successor_node = current_node.next
         predecessor_node = current_node.prev
     
@@ -92,7 +93,7 @@ class LinkedList:
         
         while (current_node != None): 
             if (current_node.item == key): 
-                return current_node.price
+                return current_node
             # print(current_node)
             current_node = current_node.next
             
