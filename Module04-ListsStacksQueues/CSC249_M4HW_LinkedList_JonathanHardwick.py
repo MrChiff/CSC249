@@ -53,7 +53,7 @@ class LinkedList:
             new_node.next = self.head
             self.head.prev = new_node
             self.head = new_node
-    
+    #-------------------------------------------------
     def insert_after(self, current_node, new_node):
         
         if self.head is None:
@@ -69,7 +69,7 @@ class LinkedList:
             new_node.prev = current_node
             current_node.next = new_node
             successor_node.prev = new_node
-    
+    #------------------------------------------------
     def remove(self, current_node):
         
         successor_node = current_node.next
@@ -86,7 +86,7 @@ class LinkedList:
     
         if current_node is self.tail:
             self.tail = predecessor_node
-    
+    #-----------------------------------------------------
     def ListSearch(self, key):
         
         current_node = self.head # start at head
@@ -98,7 +98,7 @@ class LinkedList:
             current_node = current_node.next
             
         return None
-    
+    #-------------------------------------------------------
     def inventoryValue(self):
         
         current_node = self.head 
@@ -108,7 +108,7 @@ class LinkedList:
             current_node = current_node.next
             
         return total
-    
+    #----------------------------------------------------------------------------------------
     def __repr__(self):
         
         current_node = self.head 
@@ -118,10 +118,9 @@ class LinkedList:
         while (current_node != None): 
             print(f'{current_node.item:<16}{current_node.price:<16}{current_node.quant:<16}')
             current_node = current_node.next
-            # if (current_node.next == None):
-            #     break
-        if (current_node == None):
-            return "-"*48 + "\n"
+            
+        # if (current_node == None):
+        return "-"*48 + "\n"
         
         
 

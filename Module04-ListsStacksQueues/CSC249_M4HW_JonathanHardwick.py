@@ -254,75 +254,52 @@ def main():
                         
                     print("\nShop Inventory:")
                     print(shop_inventory)
+                    print("Amount of gold: ", player_money)
                     
                     itemName = input("What is the item that you want to purchase? (cancel to end)\t")
                     itemName = itemName.strip()
                     if itemName == "cancel":
                         break
                     
-                    # Don't have to have the user state the price.
-                    #
-                    # while True:
-                    #     try:
-                    #        reqPrice = int(input("\nWhat is the price of the " + itemName + \
-                    #                             " you want to purchase?\t"))
-                        
-                    #     # If the user does not enter an int, display an error message.
-                    #     except ValueError:
-                            
-                    #         print("\nPlease input a valid integer value.")
-                        
-                    #     # Catch-all general error.
-                    #     except:
-                    #         print("\nGeneral Error.")
-                            
-                    #     else:
-                    #         break
-                    
                     # TODO:
                         # print updated shop inventory (remove node and then add updated node)
                         
-                    # !!!!!!!!! Thoughts:  This way I can pass the entire Node() with all values and 
-                    # then choose the value I want when using ListSearch()
-                    # if shop_inventory.ListSearch(itemName) == None:
-                    #     print("Testing statement for new if-elif statement.  Product not found. Try again.")
-                        
-                    # elif shop_inventory.ListSearch(itemName) == reqPrice:
-                    # #    item found and subtract money and add to player inventory
-                    #     print("Testing statement for new if-elif statement.  Product found!!!!")
-                        
-                    #     # Subtract price from player's money.
-                    #     # !!!!!!Consider adding this as a class (review 221)
-                    #     player_money = player_money - reqPrice
-                        
-                    #     # Add new item to player's inventory.
-                    #     player_inventory.append(Node(itemName, reqPrice))
-                             
-                    #     print("\nPlayer's Updated Inventory:")
-                    #     print(player_inventory)
-                    #     break
-                    
                     # Assigns the node with the matching name to a new variable to make it shorter
                     # to use the components of the Node() class.
-                    newNode = shop_inventory.ListSearch(itemName)
+                    purchase = shop_inventory.ListSearch(itemName)
                     
-                    if (newNode):
+                    if (purchase):
                         print("\n" + itemName.capitalize() + " found!")
-                        print(newNode)
+                        print(purchase)
                     
                         # Subtract price from player's money.
                         # !!!!!!Consider adding this as a class (review 221)
-                        player_money = player_money - newNode.price
+                        player_money = player_money - purchase.price
                         
                         
                         # print("Player Inventory before addition:")
                         # print(player_inventory)
+                        
+                        # Does the player already have this item?
+                        itemInInventory = player_inventory.ListSearch(itemName)
+                        
+                        # If the same type of item already exists in the player inventory:
+                        if itemInInventory:
+                            # Increase the quantity of the item in the inventory
+                            # newQuant = itemInInventory.quant + 1
+                            newNode = Node(itemInInventory.item, itemInInventory.price, itemInInventory.quant + 1)
+                            player_inventory.insert_after(itemInInventory.prev, newNode)
                             
-                        # Add new item to player's inventory.
-                        player_inventory.append(Node(newNode.item, newNode.price, 1))
+                        # If the item is not in the player inventory:
+                        else:    
+                            
+                            # Add new item to player's inventory.
+                            
+                            player_inventory.append(Node(purchase.item, purchase.price, 1))
                              
                         print("\nPlayer's Updated Inventory:")
                         print(player_inventory)
+                        print("Amount of gold: ", player_money)
                         break
                     
                     else:
