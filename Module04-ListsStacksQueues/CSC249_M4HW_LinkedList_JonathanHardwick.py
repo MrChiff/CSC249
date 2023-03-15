@@ -33,7 +33,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-
+    #-------------------------------------------
     def append(self, new_node):
     
         if self.head == None:
@@ -43,7 +43,7 @@ class LinkedList:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-        
+    #--------------------------------------------    
     def prepend(self, new_node):
         
         if self.head == None:
@@ -56,13 +56,16 @@ class LinkedList:
     #-------------------------------------------------
     def insert_after(self, current_node, new_node):
         
+        # if no items are in the list:
         if self.head is None:
             self.head = new_node
             self.tail = new_node
+        # if the current node is the tail (insert before tail)
         elif current_node is self.tail:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
+
         else:
             successor_node = current_node.next
             new_node.next = successor_node

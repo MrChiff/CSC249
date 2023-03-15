@@ -288,11 +288,18 @@ def main():
                         # Updating player inventory.
                         # If the same type of item already exists in the player inventory:
                         if itemInInventory:
-                            # Increase the quantity of the item in the inventory
-                            # newQuant = itemInInventory.quant + 1
+                            # Increase the quantity of the item in the player's inventory
                             newNode = Node(itemInInventory.item, itemInInventory.price, itemInInventory.quant + 1)
-                            player_inventory.insert_after(itemInInventory.prev, newNode)
-                            player_inventory.remove(itemInInventory)
+                            
+                            # if updating the head:
+                            if (itemInInventory.prev is None):
+                                player_inventory.prepend(newNode)
+                                player_inventory.remove(itemInInventory)
+                                
+                            # if any other node in linked list:
+                            else:
+                                player_inventory.insert_after(itemInInventory.prev, newNode)
+                                player_inventory.remove(itemInInventory)
                             
                         # If the item is not in the player inventory:
                         else:    
