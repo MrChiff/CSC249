@@ -239,7 +239,7 @@ def main():
         
     # Creating Player inventory:
     player_inventory = playerInventory()
-    player_money = 900
+    player_money = 100
     
     # Creating shop inventory:
     shop_inventory = shopInventory()
@@ -270,19 +270,28 @@ def main():
                     itemName = itemName.strip().lower()
                     if itemName == "cancel":
                         break
+                    
+                    # add exception handling
+                    itemQuantity = int(input("\nHow many " + itemName + "s do you want to buy?\t"))
                         
                     # Assigns the node with the matching name to a new variable to make it shorter
                     # to use the components of the Node() class.
                     purchase = shop_inventory.ListSearch(itemName)
                     
                     # Check to see if the item is in the shop inventory
-                    if (purchase):
+                    if (purchase and itemQuantity < purchase.quant):
                         print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
                               + str(purchase.quant) + ")")
                     
                         # Subtract price from player's money.
                         # !!!!!!Consider adding this as a class (review 221)
-                        player_money = player_money - purchase.price
+                        # check to make sure funds are available
+                        if (player_money < purchase.price*itemQuantity):
+                            print("You do not have enough funds to make this purchase.")
+                            break
+                        
+                        else:
+                            player_money = player_money - purchase.price * itemQuantity
                         
                         if TESTING:
                             printInventory("player (before purchase)", player_inventory)
@@ -322,6 +331,13 @@ def main():
                         if TESTING:
                             printInventory("updated shop", shop_inventory)
                             
+                        break
+                    
+                    # Make sure there are enough items in stock.
+                    elif (purchase and itemQuantity > purchase.quant):
+                        
+                        print("There are not " + str(itemQuantity) + " " + itemName + "s in stock. "\
+                              "You can only " + str(purchase.quant) + " or fewer." )
                         break
                     
                     else:
