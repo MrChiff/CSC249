@@ -77,7 +77,7 @@
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 import random
 
-TESTING = True
+TESTING = False
 
 #=============#
 def mainMenu():
@@ -149,26 +149,6 @@ def inventoryItems():
         
     prices = [8, 5, 3, 5, 6, 2, 4, 1, 300, 7, 100, 30, 50, 10, 3, 6, 2, 25, 10, 3]
     
-        
-    
-    
-    # itemDict = {"sword":8, "sheild":5, "boots":3, "shirt":5, "pants":(6,5), "potion":2, "bow":4, \
-    #             "arrows":1, "llama":300, "helmet":7, "horse":100, "saddle":30, "gold":50, \
-    #             "sleeping bag":10, "book":3, "key":6, "apple":2, "jewel":25, "axe":10, "bomb":3}
-        
-    # shopDict = {}
-    # for i in range(len(items)):
-    #     shopDict[items[i]] = (prices[i], shop_quantities[i])
-        
-    # playerDict = {}
-    # for i in range(10):
-    #     playerDict[items[i]] = (prices[i], player_quantities[i])
-    
-    # Displays the keys of the dictionary
-    # print(itemDict.keys())
-    # print(itemDict.values())
-    
-    # return (items, prices, shop_quantities, player_quantities)
     return (items, prices)#, shop_quantities, player_quantities)
 
 #====================#
@@ -209,7 +189,23 @@ def shopInventory():
     
     return shop_inventory
 
-
+#==============================================================#
+def existingItemQuantityUpdate(inventory, old_entry, new_entry):
+#==============================================================#
+    
+    # if updating the head:
+    if (old_entry.prev is None):
+        inventory.prepend(new_entry)
+        inventory.remove(old_entry)
+    
+    # if the quantity is zero => remove item entirely from list
+    elif (new_entry.quant <= 0):
+        inventory.remove(old_entry)
+        
+    # if any other node in linked list:
+    else:
+        inventory.insert_after(old_entry.prev, new_entry)
+        inventory.remove(old_entry)
 
     
 #=========#
@@ -262,9 +258,6 @@ def main():
                     itemName = itemName.strip().lower()
                     if itemName == "cancel":
                         break
-                    
-                    # TODO:
-                        # print updated shop inventory (remove node and then add updated node)
                         
                     # Assigns the node with the matching name to a new variable to make it shorter
                     # to use the components of the Node() class.
@@ -274,64 +267,47 @@ def main():
                     if (purchase):
                         print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
                               + str(purchase.quant) + ")")
-                        # print(purchase)
                     
                         # Subtract price from player's money.
                         # !!!!!!Consider adding this as a class (review 221)
                         player_money = player_money - purchase.price
                         
                         if TESTING:
-                            print("Player Inventory before addition:")
+                            print("\nPlayer Inventory before addition:")
                             print(player_inventory)
                         
                         # Does the player already have this item?
-                        itemInInventory = player_inventory.ListSearch(itemName)
+                        item_in_player_inventory = player_inventory.ListSearch(itemName)
                         
                         # Updating player inventory.
                         # If the same type of item already exists in the player inventory:
-                        if itemInInventory:
+                        if item_in_player_inventory:
                             # Increase the quantity of the item in the player's inventory
-                            newNode = Node(itemInInventory.item, itemInInventory.price,\
-                                           itemInInventory.quant + 1)
-                            
-                            # if updating the head:
-                            if (itemInInventory.prev is None):
-                                player_inventory.prepend(newNode)
-                                player_inventory.remove(itemInInventory)
-                                
-                            # if any other node in linked list:
-                            else:
-                                player_inventory.insert_after(itemInInventory.prev, newNode)
-                                player_inventory.remove(itemInInventory)
+                            update_player_node = Node(item_in_player_inventory.item,\
+                                                      item_in_player_inventory.price,\
+                                                      item_in_player_inventory.quant + 1)
+                            # Updating player_inventory linked list
+                            existingItemQuantityUpdate(player_inventory, item_in_player_inventory,\
+                                                       update_player_node)
                             
                         # If the item is not in the player inventory:
                         else:    
                             # Add new item to player's inventory.
                             player_inventory.append(Node(purchase.item, purchase.price, 1))
                             
-                        # Update shop_inventory item quantity
-                        update_shop = Node(purchase.item, purchase.price, purchase.quant - 1)
-                        
-                        # if updating the head:
-                        if (purchase.prev is None):
-                            shop_inventory.prepend(update_shop)
-                            shop_inventory.remove(purchase)
-                        
-                        # if the quantity is zero => remove item entirely from list
-                        elif (update_shop.quant <= 0):
-                            shop_inventory.remove(purchase)
-                            
-                        # if any other node in linked list:
-                        else:
-                            shop_inventory.insert_after(purchase.prev, update_shop)
-                            shop_inventory.remove(purchase)
-                             
                         print("\nPlayer's Updated Inventory:")
                         print(player_inventory)
                         print("Amount of gold: ", player_money, "\n")
                         
-                        print("\nUpdated Shop Inventory:")
-                        print(shop_inventory)
+                        # Create new shop_inventory node
+                        update_shop_node = Node(purchase.item, purchase.price, purchase.quant - 1)
+                        # Update shop_inventory item quantity
+                        existingItemQuantityUpdate(shop_inventory, purchase, update_shop_node)
+                        
+                        if TESTING:
+                            print("\nUpdated Shop Inventory:")
+                            print(shop_inventory)
+                            
                         break
                     
                     else:

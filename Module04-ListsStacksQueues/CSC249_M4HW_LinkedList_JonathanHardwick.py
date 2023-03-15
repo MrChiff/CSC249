@@ -115,14 +115,13 @@ class LinkedList:
     def __repr__(self):
         
         current_node = self.head 
-        print("-"*48 + "\n")
+        print("-"*48)
         print(f'{"ITEM:":<16}{"PRICE:":<16}{"QUANTITY:":<16}')
         print(f'{"-----":<16}{"------":<16}{"---------":<16}')
         while (current_node != None): 
-            print(f'{current_node.item:<16}{current_node.price:<16}{current_node.quant:<16}')
+            print(current_node)
             current_node = current_node.next
             
-        # if (current_node == None):
         return "-"*48 + "\n"
         
         
