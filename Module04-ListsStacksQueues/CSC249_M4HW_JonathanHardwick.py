@@ -207,7 +207,15 @@ def existingItemQuantityUpdate(inventory, old_entry, new_entry):
         inventory.insert_after(old_entry.prev, new_entry)
         inventory.remove(old_entry)
 
+#==================================#
+def printInventory(name, inventory):
+#==================================#   
+ 
+    print(name.capitalize() + " Inventory")
+    print(inventory)
     
+    
+
 #=========#
 def main():
 #=========#
@@ -333,8 +341,6 @@ def main():
                     else:
                         break
                     
-                    
-            
         #============================#
         # OPTION 2:  View inventory. #
         #============================#
@@ -346,13 +352,8 @@ def main():
                   "\n | OPTION 2:  View inventory. |"\
                   "\n |============================|\n")
                 
-            print("Player Inventory")
-            print(player_inventory)
-            
-            # TODO:
-                # talley the number of each item to show
-            
-                
+            printInventory("player", player_inventory)
+             
         #==========================#
         # OPTION 3:  Sell an item. #
         #==========================#
@@ -363,6 +364,8 @@ def main():
             print("\n |==========================|"\
                   "\n | OPTION 3:  Sell an item. |"\
                   "\n |==========================|")
+                
+            printInventory("player", player_inventory)
                 
             itemName = input("\nWhat is the item that you want to sell?\t")
             itemQuantity = int(input("How many " + itemName + "s do you want to sell?\t"))
@@ -379,9 +382,8 @@ def main():
             print("\n |========================================|"\
                   "\n | OPTION 4:  View total inventory value. |"\
                   "\n |========================================|")
-                
-            print("Player Inventory")
-            print(player_inventory)
+            
+            printInventory("player", player_inventory)
             print("Total Value = ", player_inventory.inventoryValue())
             
             
