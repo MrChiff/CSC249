@@ -275,81 +275,83 @@ def main():
                     if itemName == "cancel":
                         break
                     
-                    # add exception handling
-                    itemQuantity = int(input("\nHow many " + itemName + "s do you want to buy?\t"))
-                        
                     # Assigns the node with the matching name to a new variable to make it shorter
                     # to use the components of the Node() class.
                     purchase = shop_inventory.ListSearch(itemName)
                     
-                    # Check to see if the item is in the shop inventory
-                    if (purchase and itemQuantity < purchase.quant):
-                        
-                        print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
-                              + str(purchase.quant) + ")")
-                            
-                        time.sleep(3)
+                    if purchase:
                     
-                        # Subtract price from player's money.
-                        # !!!!!!Consider adding this as a class (review 221)
-                        # check to make sure funds are available
-                        if (player_money < purchase.price*itemQuantity):
-                            print("\nYou do not have enough funds to make this purchase.")
-                            time.sleep(3)
-                            break
+                        # add exception handling
+                        itemQuantity = int(input("\nHow many " + itemName + "s do you want to buy?\t"))
                         
+                        # Check to see if the item is in the shop inventory
+                        if (itemQuantity < purchase.quant):
+                            
+                            print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
+                                  + str(purchase.quant) + ")")
+                                
+                            time.sleep(3)
+                        
+                            # Subtract price from player's money.
+                            # !!!!!!Consider adding this as a class (review 221)
+                            # check to make sure funds are available
+                            if (player_money < purchase.price*itemQuantity):
+                                print("\nYou do not have enough funds to make this purchase.")
+                                time.sleep(3)
+                                break
+                            
+                            else:
+                                
+                                player_money = player_money - purchase.price * itemQuantity
+                            
+                            if TESTING:
+                                
+                                print()
+                                printInventory("player (before purchase)", player_inventory)
+                            
+                            # Does the player already have this item?
+                            item_in_player_inventory = player_inventory.ListSearch(itemName)
+                            
+                            # Updating player inventory.
+                            # If the same type of item already exists in the player inventory:
+                            if item_in_player_inventory:
+                                
+                                # Increase the quantity of the item in the player's inventory
+                                update_player_node = Node(item_in_player_inventory.item,\
+                                                          item_in_player_inventory.price,\
+                                                          item_in_player_inventory.quant + itemQuantity)
+                                
+                                # can update node.quant directly
+                                # node.quant = node.quant +/- itemQuantity
+                                
+                                
+                                # Updating player_inventory linked list
+                                existingItemQuantityUpdate(player_inventory, item_in_player_inventory,\
+                                                           update_player_node)
+                                
+                            # If the item is not in the player inventory:
+                            else:    
+                                # Add new item to player's inventory.
+                                player_inventory.append(Node(purchase.item, purchase.price, itemQuantity))
+                                
+                            printInventory("player", player_inventory)
+                            print("Amount of gold: ", player_money)
+                            
+                            # Create new shop_inventory node
+                            update_shop_node = Node(purchase.item, purchase.price, purchase.quant - itemQuantity)
+                            # Update shop_inventory item quantity
+                            existingItemQuantityUpdate(shop_inventory, purchase, update_shop_node)
+                            
+                            if TESTING:
+                                print()
+                                printInventory("updated shop", shop_inventory)
+                        
+                        # Make sure there are enough items in stock.
                         else:
                             
-                            player_money = player_money - purchase.price * itemQuantity
-                        
-                        if TESTING:
-                            
-                            print()
-                            printInventory("player (before purchase)", player_inventory)
-                        
-                        # Does the player already have this item?
-                        item_in_player_inventory = player_inventory.ListSearch(itemName)
-                        
-                        # Updating player inventory.
-                        # If the same type of item already exists in the player inventory:
-                        if item_in_player_inventory:
-                            
-                            # Increase the quantity of the item in the player's inventory
-                            update_player_node = Node(item_in_player_inventory.item,\
-                                                      item_in_player_inventory.price,\
-                                                      item_in_player_inventory.quant + itemQuantity)
-                            
-                            # can update node.quant directly
-                            # node.quant = node.quant +/- itemQuantity
-                            
-                            
-                            # Updating player_inventory linked list
-                            existingItemQuantityUpdate(player_inventory, item_in_player_inventory,\
-                                                       update_player_node)
-                            
-                        # If the item is not in the player inventory:
-                        else:    
-                            # Add new item to player's inventory.
-                            player_inventory.append(Node(purchase.item, purchase.price, itemQuantity))
-                            
-                        printInventory("player", player_inventory)
-                        print("Amount of gold: ", player_money)
-                        
-                        # Create new shop_inventory node
-                        update_shop_node = Node(purchase.item, purchase.price, purchase.quant - itemQuantity)
-                        # Update shop_inventory item quantity
-                        existingItemQuantityUpdate(shop_inventory, purchase, update_shop_node)
-                        
-                        if TESTING:
-                            print()
-                            printInventory("updated shop", shop_inventory)
-                    
-                    # Make sure there are enough items in stock.
-                    elif (purchase and itemQuantity > purchase.quant):
-                        
-                        print("\nThere are not " + str(itemQuantity) + " " + itemName + "s in stock. "\
-                              "You can only purchase " + str(purchase.quant) + " or fewer." )
-                        time.sleep(3)
+                            print("\nThere are not " + str(itemQuantity) + " " + itemName + "s in stock. "\
+                                  "You can only purchase " + str(purchase.quant) + " or fewer." )
+                            time.sleep(3)
                     
                     else:
                         
