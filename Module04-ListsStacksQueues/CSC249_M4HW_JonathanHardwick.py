@@ -77,6 +77,8 @@
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 import random
 
+TESTING = True
+
 #=============#
 def mainMenu():
 #=============#
@@ -256,8 +258,8 @@ def main():
                     print(shop_inventory)
                     print("Amount of gold: ", player_money)
                     
-                    itemName = input("What is the item that you want to purchase? (cancel to end)\t")
-                    itemName = itemName.strip()
+                    itemName = input("\nWhat is the item that you want to purchase? (cancel to end)\t")
+                    itemName = itemName.strip().lower()
                     if itemName == "cancel":
                         break
                     
@@ -278,9 +280,9 @@ def main():
                         # !!!!!!Consider adding this as a class (review 221)
                         player_money = player_money - purchase.price
                         
-                        
-                        # print("Player Inventory before addition:")
-                        # print(player_inventory)
+                        if TESTING:
+                            print("Player Inventory before addition:")
+                            print(player_inventory)
                         
                         # Does the player already have this item?
                         itemInInventory = player_inventory.ListSearch(itemName)
@@ -289,7 +291,8 @@ def main():
                         # If the same type of item already exists in the player inventory:
                         if itemInInventory:
                             # Increase the quantity of the item in the player's inventory
-                            newNode = Node(itemInInventory.item, itemInInventory.price, itemInInventory.quant + 1)
+                            newNode = Node(itemInInventory.item, itemInInventory.price,\
+                                           itemInInventory.quant + 1)
                             
                             # if updating the head:
                             if (itemInInventory.prev is None):
@@ -303,20 +306,36 @@ def main():
                             
                         # If the item is not in the player inventory:
                         else:    
-                            
                             # Add new item to player's inventory.
-                            
                             player_inventory.append(Node(purchase.item, purchase.price, 1))
+                            
+                        # Update shop_inventory item quantity
+                        update_shop = Node(purchase.item, purchase.price, purchase.quant - 1)
+                        
+                        # if updating the head:
+                        if (purchase.prev is None):
+                            shop_inventory.prepend(update_shop)
+                            shop_inventory.remove(purchase)
+                        
+                        # if the quantity is zero => remove item entirely from list
+                        elif (update_shop.quant <= 0):
+                            shop_inventory.remove(purchase)
+                            
+                        # if any other node in linked list:
+                        else:
+                            shop_inventory.insert_after(purchase.prev, update_shop)
+                            shop_inventory.remove(purchase)
                              
                         print("\nPlayer's Updated Inventory:")
                         print(player_inventory)
-                        print("Amount of gold: ", player_money)
+                        print("Amount of gold: ", player_money, "\n")
+                        
+                        print("\nUpdated Shop Inventory:")
+                        print(shop_inventory)
                         break
                     
                     else:
                         print("\n" + itemName.capitalize() + " not found! Try again!")
-                
-                
                     
                 while True:
                     try:
