@@ -149,7 +149,7 @@ def inventoryItems():
         
     prices = [8, 5, 3, 5, 6, 2, 4, 1, 300, 7, 100, 30, 50, 10, 3, 6, 2, 25, 10, 3]
     
-    return (items, prices)#, shop_quantities, player_quantities)
+    return (items, prices)
 
 #====================#
 def playerInventory():
@@ -234,6 +234,8 @@ def main():
     #   read in file contents
     # else:
     #   initialize player/shop inventory with the playerInventory() and shopInventory() functions
+    # use json.loads and json.dumps to save the cart
+    
         
     # Creating Player inventory:
     player_inventory = playerInventory()
@@ -295,6 +297,11 @@ def main():
                             update_player_node = Node(item_in_player_inventory.item,\
                                                       item_in_player_inventory.price,\
                                                       item_in_player_inventory.quant + 1)
+                            
+                            # can update node.quant directly
+                            # node.quant = node.quant +/- itemQuantity
+                            
+                            
                             # Updating player_inventory linked list
                             existingItemQuantityUpdate(player_inventory, item_in_player_inventory,\
                                                        update_player_node)

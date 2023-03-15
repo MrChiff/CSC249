@@ -1,8 +1,8 @@
 # This file exstablishes the Node Class and the Linked List Class for python.
 
-#=========#
-class Node:
-#=========#
+#===========#
+class Node: #
+#===========#
 
     """
     This class creates a Node of any type. 
@@ -18,9 +18,7 @@ class Node:
         # print(self.data)
         
     def __str__(self):
-        # return f'{self.data:<16}{self.next:<16}'
         return f'{self.item:<16}{self.price:<16}{self.quant:<16}'
-        # print(self.data)
 
 #===============#
 class LinkedList:
@@ -33,7 +31,8 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
-    #-------------------------------------------
+        
+    #----------------------------------------------------------
     def append(self, new_node):
     
         if self.head == None:
@@ -43,7 +42,8 @@ class LinkedList:
             self.tail.next = new_node
             new_node.prev = self.tail
             self.tail = new_node
-    #--------------------------------------------    
+            
+    #----------------------------------------------------------    
     def prepend(self, new_node):
         
         if self.head == None:
@@ -53,7 +53,8 @@ class LinkedList:
             new_node.next = self.head
             self.head.prev = new_node
             self.head = new_node
-    #-------------------------------------------------
+            
+    #----------------------------------------------------------
     def insert_after(self, current_node, new_node):
         
         # if no items are in the list:
@@ -73,7 +74,7 @@ class LinkedList:
             current_node.next = new_node
             successor_node.prev = new_node
             
-    #------------------------------------------------
+    #----------------------------------------------------------
     def remove(self, current_node):
         
         successor_node = current_node.next
@@ -92,7 +93,7 @@ class LinkedList:
         if current_node is self.tail:
             self.tail = predecessor_node
             
-    #-----------------------------------------------------
+    #----------------------------------------------------------
     def ListSearch(self, key):
         
         current_node = self.head # start at head
@@ -104,7 +105,7 @@ class LinkedList:
             current_node = current_node.next
             
         return None
-    #-------------------------------------------------------
+    #----------------------------------------------------------
     def inventoryValue(self):
         
         current_node = self.head 
@@ -114,7 +115,8 @@ class LinkedList:
             current_node = current_node.next
             
         return total
-    #----------------------------------------------------------------------------------------
+    
+    #----------------------------------------------------------
     def __repr__(self):
         
         current_node = self.head 
