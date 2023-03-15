@@ -72,23 +72,26 @@ class LinkedList:
             new_node.prev = current_node
             current_node.next = new_node
             successor_node.prev = new_node
+            
     #------------------------------------------------
     def remove(self, current_node):
         
         successor_node = current_node.next
         predecessor_node = current_node.prev
     
+        # if the node being removed is not the tail:
         if successor_node is not None:
             successor_node.prev = predecessor_node
-    
+        # if the node being removed is not the head:
         if predecessor_node is not None:
             predecessor_node.next = successor_node
-    
+        # if the head is being removed:
         if current_node is self.head:
             self.head = successor_node
-    
+        # if the tail is being removed:
         if current_node is self.tail:
             self.tail = predecessor_node
+            
     #-----------------------------------------------------
     def ListSearch(self, key):
         
