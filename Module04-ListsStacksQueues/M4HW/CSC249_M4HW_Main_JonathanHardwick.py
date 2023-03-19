@@ -273,9 +273,7 @@ def printInventory(name, inventory):
     
     print(name.capitalize() + " Inventory")
     print(inventory)
-    time.sleep(3)
-    
-    
+  
 
 #=========#
 def main():
@@ -362,6 +360,9 @@ def main():
                                 # Prompt the user for the number of items he wants to purchase.
                                 itemQuantity = int(input("\nHow many " + itemName + "s do you want to buy?\t"))
                                 
+                                if (itemQuantity < 0):
+                                    raise ValueError("The item quanity must be a positive integer. Try again.")
+                                
                             # If the user does not enter a positive int, display an error message.
                             except ValueError:
                                 print("\nPlease use only positive integer values.")
@@ -394,6 +395,7 @@ def main():
                                 
                                 print()
                                 printInventory("player (before purchase)", player_inventory)
+                                time.sleep(3)
                             
                             # Does the player already have this item?
                             item_in_player_inventory = player_inventory.ListSearch(itemName)
@@ -432,6 +434,7 @@ def main():
                             if TESTING:
                                 print()
                                 printInventory("updated shop", shop_inventory)
+                                time.sleep(3)
                         
                         # Make sure there are enough items in stock.
                         else:
@@ -520,6 +523,9 @@ def main():
                             try: 
                                 # Prompt the user for the number of items he wants to purchase.
                                 itemQuantity = int(input("\nHow many " + itemName + "s do you want to sell?\t"))
+                                
+                                if (itemQuantity < 0):
+                                    raise ValueError("The item quanity must be a positive integer. Try again.")
                                                                 
                             # If the user does not enter an int, display an error message.
                             except ValueError:
