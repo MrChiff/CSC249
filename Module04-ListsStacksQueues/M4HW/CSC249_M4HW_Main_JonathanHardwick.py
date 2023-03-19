@@ -105,6 +105,9 @@
 
 # Thoughts:
 #   Added money exchange as a bank like class (review 221)
+#   Move the options to individual files in order to make the code easier to read and only focus on 
+#       one option at a time.
+#   Move all functions to their own file.
 
 # Importing libraries
 
@@ -375,10 +378,8 @@ def main():
                             
                             print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
                                   + str(purchase.quant) + ")\n")
-                                
                             time.sleep(3)
-                        
-                            # !!!!!!Consider adding this as a class (review 221)
+                            
                             # Checking to make sure funds are available.
                             if (player_money < purchase.price*itemQuantity):
                                 print("\nYou do not have enough funds to make this purchase.")
@@ -386,11 +387,10 @@ def main():
                                 break
                             
                             else:
-                                
+                                # Updating player currency.
                                 player_money = player_money - purchase.price * itemQuantity
                             
                             if TESTING:
-                                
                                 print()
                                 printInventory("player (before purchase)", player_inventory)
                                 time.sleep(3)
@@ -440,7 +440,10 @@ def main():
                             print("\nThere are not " + str(itemQuantity) + " " + itemName + "s in stock. "\
                                   "You can only purchase " + str(purchase.quant) + " or fewer." )
                             time.sleep(3)
+                            
+                        break
                     
+                    # If the item is not found in the shop inventory.
                     else:
                         
                         print("\n" + itemName.capitalize() + " not found! Try again!")
@@ -448,11 +451,12 @@ def main():
                     
                 while True:
                     try:
-                        # Asking the player if he wants to purchase another item
-                        cont = int(input("\nDo you want to purchase another item?\n" + \
+                        # Asking the player if he wants to purchase another item.
+                        cont = int(input("\nDo you want to sell another item?\n" + \
                                      "1) Yes\n" + \
                                      "2) No\n"))
-                            
+                        
+                        # If the user does not enter 1 or 2.
                         if (cont < 0 or cont > 3):
                             raise ValueError
                     
@@ -466,7 +470,6 @@ def main():
                         print("\nGeneral Error.")
                         
                     else:
-                        
                         break
                     
         #============================#
@@ -479,8 +482,11 @@ def main():
             print("\n |============================|"\
                   "\n | OPTION 2:  View inventory. |"\
                   "\n |============================|\n")
-                
+            
+            # Display player's inventory.
             printInventory("player", player_inventory)
+            
+            # Display player's currency
             print("Amount of gold: ", player_money)
              
         #==========================#
@@ -494,14 +500,19 @@ def main():
             while cont != 2:
                 
                 while True:
+                    
+                    # Print option label.
                     print("\n |==========================|"\
                           "\n | OPTION 3:  Sell an item. |"\
                           "\n |==========================|\n")
                         
+                    # Display the shops inventory to determine what and how much to purchase    
                     printInventory("player", player_inventory)
                     
+                    # Remind the user how much money he has to use.
                     print("Amount of gold: ", player_money)
-                        
+                    
+                    # Prompt the user for the name of the item he wants to sell.
                     itemName = input("""\nWhat is the item that you want to sell? ("cancel" to exit)\t""")
                     itemName = itemName.strip().lower()
                     
@@ -511,9 +522,9 @@ def main():
                     # Finding the item the player wants to sell.
                     selling = player_inventory.ListSearch(itemName)
                     
-                    itemQuantity = -1
-                    
                     if selling:
+                        
+                        itemQuantity = -1
                     
                         while itemQuantity < 0:
                             try: 
