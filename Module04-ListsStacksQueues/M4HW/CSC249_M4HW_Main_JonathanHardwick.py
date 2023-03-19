@@ -91,24 +91,29 @@
 #      questions.
 #    - Once a transaction is completed, the user is asked if he wants to perform another transaction
 #      of the same kind.
-#      
-#    Option 1:  Purchasing Items (from the store by the player)
-#    Option 2:  Viewing the Player's Inventory.
-#    Option 3:  Selling Items To The Store From the Player.
-#    Option 4:  Player's Total Inventory Value.
+#    - Added 3 second pauses (time.sleep(3)) in the code in order to make it more readable.
+
+
+# Thoughts: !!!!!!!!!!!
+# could save the player/shop inventory by saving to a file and reading in the file at the start 
+# of the program.
+# if file exists:
+#   read in file contents
+# else:
+#   initialize player/shop inventory with the playerInventory() and shopInventory() functions
+# use json.loads and json.dumps to save the cart
+
+# Thoughts:
+#   Added money exchange as a bank like class (review 221)
 
 # Importing libraries
-
-# Clearing the screen
-import os
-os.system('cls' if os.name == 'nt' else 'clear')
 
 # Importing the Node class and the LinkedList class
 from CSC249_M4HW_LinkedList_JonathanHardwick import Node, LinkedList
 import random
 import time
 
-TESTING = True
+TESTING = False
 
 #=============#
 def mainMenu():
@@ -177,6 +182,9 @@ def inventoryItems():
     """
     This function creates the list of items and prices that are used for bartering.  These lists are 
     passed as a tuple to prevent changes being made to the original lists.
+    
+    inputs:  none
+    outputs: none
     """
     
     items = ["sword", "shield", "boots", "shirt", "pants", "potion", "bow", "arrows", "llama", \
@@ -281,16 +289,6 @@ def main():
 
     # Initialize the sentinel value to zero.
     sent = 0
-    
-    # Thoughts: !!!!!!!!!!!
-    # could save the player/shop inventory by saving to a file and reading in the file at the start 
-    # of the program.
-    # if file exists:
-    #   read in file contents
-    # else:
-    #   initialize player/shop inventory with the playerInventory() and shopInventory() functions
-    # use json.loads and json.dumps to save the cart
-    
         
     # Creating Player inventory.
     player_inventory = playerInventory()
@@ -361,7 +359,7 @@ def main():
                                 itemQuantity = int(input("\nHow many " + itemName + "s do you want to buy?\t"))
                                 
                                 if (itemQuantity < 0):
-                                    raise ValueError("The item quanity must be a positive integer. Try again.")
+                                    raise ValueError
                                 
                             # If the user does not enter a positive int, display an error message.
                             except ValueError:
@@ -376,7 +374,7 @@ def main():
                         if (itemQuantity <= purchase.quant):
                             
                             print("\n" + itemName.capitalize() + " found in stock! (quantity: " \
-                                  + str(purchase.quant) + ")")
+                                  + str(purchase.quant) + ")\n")
                                 
                             time.sleep(3)
                         
@@ -443,15 +441,10 @@ def main():
                                   "You can only purchase " + str(purchase.quant) + " or fewer." )
                             time.sleep(3)
                     
-                    elif purchase is None:
+                    else:
                         
                         print("\n" + itemName.capitalize() + " not found! Try again!")
                         time.sleep(3)
-                    
-                    else:
-                        
-                        print("Purchase:  ", purchase)
-                        print("Error with purchase if-else statement")
                     
                 while True:
                     try:
@@ -459,6 +452,9 @@ def main():
                         cont = int(input("\nDo you want to purchase another item?\n" + \
                                      "1) Yes\n" + \
                                      "2) No\n"))
+                            
+                        if (cont < 0 or cont > 3):
+                            raise ValueError
                     
                     # If the user does not enter an int, display an error message.
                     except ValueError:
@@ -525,8 +521,8 @@ def main():
                                 itemQuantity = int(input("\nHow many " + itemName + "s do you want to sell?\t"))
                                 
                                 if (itemQuantity < 0):
-                                    raise ValueError("The item quanity must be a positive integer. Try again.")
-                                                                
+                                    raise ValueError
+                                    
                             # If the user does not enter an int, display an error message.
                             except ValueError:
                                 print("\nPlease use only positive integer values.")
@@ -548,6 +544,7 @@ def main():
                             
                             if TESTING:
                                 printInventory("shop (before sale)", shop_inventory)
+                                time.sleep(3)
                                 
                             # Does the player already have this item?
                             item_in_shop_inventory = shop_inventory.ListSearch(itemName)
@@ -572,6 +569,7 @@ def main():
                             
                             if TESTING:
                                 printInventory("shop", shop_inventory)
+                                time.sleep(3)
                             
                             # Create new player_inventory node
                             update_player_node = Node(selling.item, selling.price,\
@@ -581,6 +579,7 @@ def main():
                             
                             if TESTING:
                                 printInventory("player", player_inventory)
+                                time.sleep(3)
                             
                             print("Amount of gold: ", player_money)
                             break
@@ -590,18 +589,22 @@ def main():
                         else:
                             print("You don't have " + str(itemQuantity) + " " + itemName + \
                                   "s. (quantity cannot exceed inventory)")
+                            time.sleep(3)
                                 
                     else:
                         
                         print("\n" + itemName.capitalize() + " not found! Try again!")
+                        time.sleep(3)
                         
                 while True:
                     try:
                         # Asking the player if he wants to purchase another item
-                        # Add exception handling 
                         cont = int(input("\nDo you want to sell another item?\n" + \
                                      "1) Yes\n" + \
                                      "2) No\n"))
+                            
+                        if (cont < 0 or cont > 3):
+                            raise ValueError
                     
                     # If the user does not enter an int, display an error message.
                     except ValueError:
@@ -624,7 +627,7 @@ def main():
             
             print("\n |========================================|"\
                   "\n | OPTION 4:  View total inventory value. |"\
-                  "\n |========================================|")
+                  "\n |========================================|\n")
             
             printInventory("player", player_inventory)
             print("Total Value = ", player_inventory.inventoryValue())
