@@ -10,12 +10,12 @@ M4LAB1 - Linked Lists of records (CPP)
 modified from m4lab2
 modified to use Templates as shown in Gaddis C++ ch18
 (which allows for lists containing any one type of data)
-your name
-today's date
+Jonathan Hardwick
+2023/03/14
 */
 
 /*
-TODO 3/14/23: 
+TODO 3/14/23:
 - create Item class
 - template nodes to contain Item objects (or just modify Node to only take Item objects)
 - follow instructions from m4lab1:
@@ -29,7 +29,7 @@ Then manipulate the list as follows:
     Print the list again.
 TODO for HW: while we don't need it for this assignment,
 being able to find a node which contains specific data
-is needed for the homework. 
+is needed for the homework.
 
 */
 
@@ -89,7 +89,7 @@ int main() {
   or look for item with price 0.99
   */
 
-  // Task 3: add a fourth item 
+  // Task 3: add a fourth item
   // add durian to our store inventory
   Node<Item>* node_d = new Node<Item>(item_d);
   store.Append(node_d);
@@ -104,7 +104,7 @@ int main() {
     probe = probe->next;
   }
   cout << endl;
-  
-  
-  
+
+
+
 }
