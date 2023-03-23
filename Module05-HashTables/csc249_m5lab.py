@@ -4,6 +4,7 @@
 # 3/16/23
 
 import getpass # allows non-echo password input
+import hashlib 
 """
 example hashing and salting password program
 The program requirements are:
@@ -70,6 +71,9 @@ def login():
     print('ERROR', error)
     return None
   print("your username is", username,"with password", password)
+  #pw_hash = hashlib.sha256(password).hexdigest()
+  # binary encode password before hashing
+  print("SHA256 hash is:", pw_hash)
   if username in passwords.keys():
     # username exists, check password
     storedpass = passwords[username]
@@ -88,17 +92,21 @@ def register():
   """
   print("Creating new account.")
   username = input("Username: ")
-  #password = input("password: ") # this shows the password!
+  #password = input("password: ") # this shows the pas sword!
   try:
     password = getpass.getpass()  # does not echo the password 
   except Exception as error:
     print('ERROR', error)
     return
   print("your username is", username,"with password", password)
+  
   if username in passwords.keys():
     print("ERROR: Account exists.")
     return
   print("Creating account for ", username)
+  # store hash rather than password
+  pw_hash = hashlib.sha256(password).hexdigest()
+  print("SHA256 hash is:", pw_hash)
   passwords.update({username: password})
 
 
