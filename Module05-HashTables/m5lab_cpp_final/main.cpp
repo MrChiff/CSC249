@@ -81,7 +81,23 @@ void menu_ui(LoginApp* app) {
 
 // Function definitions for UI
 void login_ui(LoginApp* app) {
-
+    /*
+    GEt the user name and password, send these to the LoginApp,
+    and respond based on whether login succeeds or fails.
+    */
+    string name, pass;
+    cout<< "username: ";
+    cin<< name;
+    cout<< "password: ";
+    cin >> pass; //TODO do not echo password
+    User current_user = app-> login(name, pass);
+    if (current_user.name == ""){
+        // invalid user
+        cout << "Login incorrect." << endl;
+    }
+    else {
+        cout << "Welcome" << current_user.username << endl;
+    }
 }
 void register_ui(LoginApp* app) {
 
