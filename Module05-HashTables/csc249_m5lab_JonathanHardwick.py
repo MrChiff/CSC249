@@ -7,7 +7,8 @@
 #        will be visible.password: 
 
 import getpass # allows non-echo password input
-import hashlib 
+import hashlib # for SHA256 (and other algorithms)
+import random, string # for our salting
 """
 example hashing and salting password program
 The program requirements are:
@@ -50,6 +51,16 @@ def make_hash(password, salt=""):
     pw_hash = hashlib.sha256(password).hexdigest()
     
     return pw_hash
+
+def make_salt():
+    """
+    Generate a random string to use for salting.
+    Simply pick at random from a list of ASCII characters.
+    """
+    length = 10
+    chars = string.ascii_letters + string.digits
+    salt = ''.join(random.choice(chars) for i in range(length))
+    return salt
 
 def main():
   """ entry point"""
@@ -104,11 +115,19 @@ def login():
   # binary encode password before hashing
   # pw_bytes = password.encode('UTF-8')
   # pw_hash = hashlib.sha256(pw_bytes).hexdigest()
-  pw_hash = make_hash(password)
-  print("SHA256 has is: ", pw_hash)
+  
   if username in passwords.keys():
     # username exists, check password
-    stored_hash = passwords[username]
+    # user_info = passwords[username]
+    # stored_hash = user_info["hash"]
+    stored_hash = passwords[username]["hash"]
+    # salt = user_info["salt"]
+    salt = passwords[username]["salt"]
+    pw_hash = make_hash(password, salt)
+    print("stored salt is: ", salt)
+    print("SHA256 hash of pw+salt is: ", pw_hash)
+    
+    
     if pw_hash == stored_hash:
       print("password matches:", pw_hash, stored_hash)
       return username
@@ -136,14 +155,18 @@ def register():
     print("ERROR: Account exists.")
     return
   print("Creating account for ", username)
-  # store hash rather than password
-  # pw_hash = hashlib.sha256(password.encode('UTF-8')).hexdigest()
-  pw_hash = make_hash(password)
-  print("SHA256 hash is:", pw_hash)
-  passwords.update({username: pw_hash})
+  # create salt
+  salt = make_salt()
+  print("new salt is: ", salt)
+  # hash and salt password
+  pw_hash = make_hash(password, salt)
+  print("salted hash is: ", pw_hash)
   
-
-
+  # store a dictionary containing has and salt for this username
+  passwords.update({username: {"hash": pw_hash, "salt": salt}})
+  
+  
+  
 def change_password():
   """
   First, require user to log in.
@@ -156,7 +179,9 @@ def change_password():
     return
   print("Enter new password for",user,".")
   newpass = getpass.getpass() 
-  passwords.update({user: newpass})
+  salt = make_salt()
+  pw_hash = make_hash(newpass, salt)
+  passwords.update({user: {"hash": pw_hash, "salt": salt}})
   print("Password changed.")
 
 if __name__ == "__main__":
