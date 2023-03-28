@@ -1,7 +1,7 @@
 # CSC 249
 # M5LAB - Hashing and Salting
 # Jonathan Hardwick
-# 2023/03/??
+# 2023/03/28
 
 # Error: Warning: QtConsole does not support password mode, the text you type 
 #        will be visible.password: 
