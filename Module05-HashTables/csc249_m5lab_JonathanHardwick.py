@@ -1,7 +1,10 @@
 # CSC 249
 # M5LAB - Hashing and Salting
-# norrisa
-# 3/16/23
+# Jonathan Hardwick
+# 2023/03/??
+
+# Error: Warning: QtConsole does not support password mode, the text you type 
+#        will be visible.password: 
 
 import getpass # allows non-echo password input
 import hashlib 
@@ -11,17 +14,43 @@ The program requirements are:
 
     Allow a user to register an account.
         They will need to enter a username and password.
-        These will be added to the password file (assuming the username is not already used).
+        These will be added to the password file (assuming the username is not 
+        already used).
     Allow a user to login.
         They will need to enter a username and password.
         These are checked against the values in the password file.
-        TODO: (The hashed entered password is compared with the hashed stored password. If they are equal, then the user has entered the correct password.)
+        TODO: (The hashed entered password is compared with the hashed stored 
+               password. If they are equal, then the user has entered the 
+               correct password.)
 
-TODO: The password must be saved in hashed format, and a random "salt" is generated at registration, which is saved along with the hashed password.
+
+TODO: The password must be saved in hashed format, and a random "salt" is 
+generated at registration, which is saved along with the hashed password.
 
 """
 
-passwords = {"admin":"admin", "user":"pw"}
+# passwords = {"admin":"admin", "user":"pw"}
+passwords = {}
+"""
+Because we use getpass() to get user passwords, and this is implemented 
+differently on unix and windows, we have to have the user make accounts using
+getpass as well.
+This is why there are no default users.
+"""
+
+def make_has(password, salt=""):
+    """
+    input: password, (optional) salt
+    output: hexencoding of the hash of password + salt
+    """
+    # add salt to password
+    password += salt
+    # convert string to binary data
+    password = password.encode('UTF-8')
+    # has the binary data
+    pw_hash = hashlib.sha256(password).hexdigest()
+    
+    return pw_hash
 
 def main():
   """ entry point"""
@@ -105,9 +134,10 @@ def register():
     return
   print("Creating account for ", username)
   # store hash rather than password
-  pw_hash = hashlib.sha256(password).hexdigest()
-  print("SHA256 hash is:", pw_hash)
+  # pw_hash = hashlib.sha256(password).hexdigest()
+  # print("SHA256 hash is:", pw_hash)
   passwords.update({username: password})
+  
 
 
 def change_password():
