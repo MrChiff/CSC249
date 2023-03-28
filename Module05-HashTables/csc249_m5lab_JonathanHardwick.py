@@ -38,7 +38,7 @@ getpass as well.
 This is why there are no default users.
 """
 
-def make_has(password, salt=""):
+def make_hash(password, salt=""):
     """
     input: password, (optional) salt
     output: hexencoding of the hash of password + salt
@@ -46,7 +46,7 @@ def make_has(password, salt=""):
     # add salt to password
     password += salt
     # convert string to binary data
-    password = password.encode('UTF-8')
+    password = password.encode('UTF-8') # blob - binary large object
     # has the binary data
     pw_hash = hashlib.sha256(password).hexdigest()
     
@@ -54,6 +54,7 @@ def make_has(password, salt=""):
 
 def main():
   """ entry point"""
+  print("Please Register an account to begin.")
   menu()
 
 def menu():
@@ -100,17 +101,20 @@ def login():
     print('ERROR', error)
     return None
   print("your username is", username,"with password", password)
-  # pw_hash = hashlib.sha256(password).hexdigest()
+  
   # binary encode password before hashing
-  # print("SHA256 hash is:", pw_hash)
+  # pw_bytes = password.encode('UTF-8')
+  # pw_hash = hashlib.sha256(pw_bytes).hexdigest()
+  pw_hash = make_hash(password)
+  print("SHA256 has is: ", pw_hash)
   if username in passwords.keys():
     # username exists, check password
     storedpass = passwords[username]
     if password == storedpass:
-      print("password matches:", password, storedpass)
+      print("password matches:", pw_hash, storedpass)
       return username
     else:
-      print("password mismatch:", password, storedpass)
+      print("password mismatch:", pw_hash, storedpass)
       return None
 
 def register():
@@ -121,9 +125,9 @@ def register():
   """
   print("Creating new account.")
   username = input("Username: ")
-  #password = input("password: ") # this shows the password!
+  # password = input("password: ") # this shows the password!
   try:
-    password = getpass.getpass("Password: ")  # does not echo the password 
+    password = getpass.getpass()  # does not echo the password 
   except Exception as error:
     print('ERROR', error)
     return
@@ -134,9 +138,10 @@ def register():
     return
   print("Creating account for ", username)
   # store hash rather than password
-  # pw_hash = hashlib.sha256(password).hexdigest()
-  # print("SHA256 hash is:", pw_hash)
-  passwords.update({username: password})
+  # pw_hash = hashlib.sha256(password.encode('UTF-8')).hexdigest()
+  pw_hash = make_hash(password)
+  print("SHA256 hash is:", pw_hash)
+  passwords.update({username: pw_hash})
   
 
 
