@@ -32,10 +32,8 @@ generated at registration, which is saved along with the hashed password.
 # passwords = {"admin":"admin", "user":"pw"}
 passwords = {}
 """
-Because we use getpass() to get user passwords, and this is implemented 
-differently on unix and windows, we have to have the user make accounts using
-getpass as well.
-This is why there are no default users.
+We would need to has the default users' passwords before the menu loads -- this
+is doable but would take some extra code. So we'll start without any users.
 """
 
 def make_hash(password, salt=""):
@@ -48,6 +46,7 @@ def make_hash(password, salt=""):
     # convert string to binary data
     password = password.encode('UTF-8') # blob - binary large object
     # has the binary data
+    # possible algorithms: sha1, md5 (very broken), sha256 (ok)
     pw_hash = hashlib.sha256(password).hexdigest()
     
     return pw_hash
@@ -109,12 +108,12 @@ def login():
   print("SHA256 has is: ", pw_hash)
   if username in passwords.keys():
     # username exists, check password
-    storedpass = passwords[username]
-    if password == storedpass:
-      print("password matches:", pw_hash, storedpass)
+    stored_hash = passwords[username]
+    if pw_hash == stored_hash:
+      print("password matches:", pw_hash, stored_hash)
       return username
     else:
-      print("password mismatch:", pw_hash, storedpass)
+      print("password mismatch:", pw_hash, stored_hash)
       return None
 
 def register():
