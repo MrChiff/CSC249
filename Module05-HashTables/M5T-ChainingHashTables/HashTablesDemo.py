@@ -38,9 +38,9 @@ for i in range(len(keys)):
 # Print each table's buckets
 tableNames = [
     "Chaining",
-    "Linear probing",
-    "Quadratic probing",
-    "Double hashing"
+    #"Linear probing",
+    #"Quadratic probing",
+    #"Double hashing"
 ]
 for j in range(len(tables)):
     print("%s: initial table:" % tableNames[j])

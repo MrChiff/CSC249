@@ -1,71 +1,67 @@
 # CSC 249
 # M5LAB - Hashing and Salting
-# Jonathan Hardwick
-# 2023/03/??
-
-# Error: Warning: QtConsole does not support password mode, the text you type 
-#        will be visible.password: 
+# norrisa
+# 3/16/23
 
 import getpass # allows non-echo password input
 import hashlib # for SHA256 (and other algorithms)
 import random, string # for our salting
+
 """
 example hashing and salting password program
 The program requirements are:
 
     Allow a user to register an account.
         They will need to enter a username and password.
-        These will be added to the password file (assuming the username is not 
-        already used).
+        These will be added to the password file (assuming the username is not already used).
     Allow a user to login.
         They will need to enter a username and password.
         These are checked against the values in the password file.
-        TODO: (The hashed entered password is compared with the hashed stored 
-               password. If they are equal, then the user has entered the 
-               correct password.)
+        TODO: (The hashed entered password is compared with the hashed stored password. If they are equal, then the user has entered the correct password.)
 
-
-TODO: The password must be saved in hashed format, and a random "salt" is 
-generated at registration, which is saved along with the hashed password.
+The password must be saved in hashed format
+and a random "salt" is generated at registration, which is saved along with the hashed password.
 
 """
 
-# passwords = {"admin":"admin", "user":"pw"}
 passwords = {}
 """
-We would need to has the default users' passwords before the menu loads -- this
-is doable but would take some extra code. So we'll start without any users.
+We would need to hash the default users' passwords before
+the menu loads -- this is doable but would take some extra code.
+So we'll start without any users.
 """
 
 def make_hash(password, salt=""):
-    """
-    input: password, (optional) salt
-    output: hexencoding of the hash of password + salt
-    """
-    # add salt to password
-    password += salt
-    # convert string to binary data
-    password = password.encode('UTF-8') # blob - binary large object
-    # has the binary data
-    # possible algorithms: sha1, md5 (very broken), sha256 (ok)
-    pw_hash = hashlib.sha256(password).hexdigest()
-    
-    return pw_hash
+  """
+  input: password, (optional) salt
+  output: hexencoding of the has of password + salt
+  """
+  # add salt to password
+  password += salt
+  # convert string to binary data
+  password = password.encode('UTF-8') # blob - binary large object
+  # hash the binary data
+  # possible algorithms: sha1, md5 (very broken), sha256 (ok)
+  pw_hash = hashlib.sha256(password).hexdigest()
+
+  return pw_hash
 
 def make_salt():
-    """
-    Generate a random string to use for salting.
-    Simply pick at random from a list of ASCII characters.
-    """
-    length = 10
-    chars = string.ascii_letters + string.digits
-    salt = ''.join(random.choice(chars) for i in range(length))
-    return salt
+  """
+  Generate a random string to use for salting.
+  Simply pick at random from a list of ASCII characters
+  """
+  length = 10
+  chars = string.ascii_letters + string.digits
+  salt = ''.join(random.choice(chars) for i in range(length))
+  return salt
 
 def main():
   """ entry point"""
-  print("Please Register an account to begin.")
+  print("Please register an account to begin.")
   menu()
+
+
 
 def menu():
   """ main menu """
@@ -111,22 +107,17 @@ def login():
     print('ERROR', error)
     return None
   print("your username is", username,"with password", password)
-  
-  # binary encode password before hashing
-  # pw_bytes = password.encode('UTF-8')
-  # pw_hash = hashlib.sha256(pw_bytes).hexdigest()
-  
+
+
   if username in passwords.keys():
     # username exists, check password
-    # user_info = passwords[username]
-    # stored_hash = user_info["hash"]
-    stored_hash = passwords[username]["hash"]
-    # salt = user_info["salt"]
-    salt = passwords[username]["salt"]
+    #stored_hash = passwords[username]["hash"]
+    user_info = passwords[username]
+    stored_hash = user_info["hash"]
+    salt = user_info["salt"]
     pw_hash = make_hash(password, salt)
     print("stored salt is: ", salt)
-    print("SHA256 hash of pw+salt is: ", pw_hash)
-    
+    print("SHA256 hash of pw+salt is:", pw_hash)
     
     if pw_hash == stored_hash:
       print("password matches:", pw_hash, stored_hash)
@@ -143,7 +134,7 @@ def register():
   """
   print("Creating new account.")
   username = input("Username: ")
-  # password = input("password: ") # this shows the password!
+  #password = input("password: ") # this shows the pas sword!
   try:
     password = getpass.getpass()  # does not echo the password 
   except Exception as error:
@@ -162,11 +153,12 @@ def register():
   pw_hash = make_hash(password, salt)
   print("salted hash is: ", pw_hash)
   
-  # store a dictionary containing has and salt for this username
-  passwords.update({username: {"hash": pw_hash, "salt": salt}})
-  
-  
-  
+  # store a dictionary containing hash and salt for this username
+  passwords.update({username: 
+                    {"hash": pw_hash, "salt": salt}
+                   })
+
+
 def change_password():
   """
   First, require user to log in.
@@ -181,7 +173,9 @@ def change_password():
   newpass = getpass.getpass() 
   salt = make_salt()
   pw_hash = make_hash(newpass, salt)
-  passwords.update({user: {"hash": pw_hash, "salt": salt}})
+  passwords.update({user: 
+                    {"hash":pw_hash, "salt":salt}
+                   })
   print("Password changed.")
 
 if __name__ == "__main__":
