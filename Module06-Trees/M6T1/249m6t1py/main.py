@@ -1,3 +1,19 @@
+# M6T1
+#
+# For M6T1, we'll set up the basic BST code that we'll use for later assignments in this module.
+#
+# Implement 6.12 in your chosen language and confirm that it works. Upload the source code and a 
+# screenshot of a sample run here.
+#
+# You can find copies of the code in both C++ and Python in my course repo, to use as a starting 
+# point: https://github.com/norrisaftcc/csc249/tree/main/m6-trees/samples-6-12
+#
+# REPL Links:
+# C++ : https://replit.com/join/gocckxslxm-ftccprogramming
+# Python: https://replit.com/join/xxpfopjxvj-ftccprogramming
+#
+#===================================================================================================
+
 # Main program to test Binary search tree.
 from Node import Node
 from BinarySearchTree import BinarySearchTree
