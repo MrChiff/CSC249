@@ -5,4 +5,9 @@ class Node:
         self.key = key 
         self.left = None
         self.right = None
+        
+    def __repr__(self):
+        print("Node: " + str(self.key))
+        print("Left child: " + str(self.left))
+        print("Right child: " + str(self.right))
     
