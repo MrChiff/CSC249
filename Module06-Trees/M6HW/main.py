@@ -118,6 +118,46 @@ def errorMessage():
     
     print("\nError:  Your choice is not valid.  Please enter a corrrect value.")
 
+#=============#
+def contMenu():
+#=============#
+
+    """
+    This function asks the user if he wants to continue for the option he is currently
+    using at the time.
+
+    inputs: none
+    outputs: cont (the continuation sentinel value)
+    """
+
+    while True:
+                    try:
+                        # Asking the player if he wants to purchase another item.
+                        cont = int(input("\nDo you want to add another plane?\n" + \
+                                     "1) Yes\n" + \
+                                     "2) No\n" + \
+                                     "Enter your choice:  "))
+                        
+                        # If the user does not enter 1 or 2.
+                        if (cont < 0 or cont > 3):
+                            raise ValueError
+                    
+                    # If the user does not enter an int, display an error message.
+                    except ValueError:
+                        
+                        print("\nPlease input a valid integer value.")
+                    
+                    # Catch-all general error.
+                    except:
+                        print("\nGeneral Error.")
+                        
+                    else:
+                        break
+    
+    return cont
+
+
+
 #=========#
 def main():
 #=========#
@@ -140,13 +180,6 @@ def main():
         print('Initial tree:')
         print(tree)
         print()
-    
-    remove_value = int(input('Enter value to remove: '))
-    print()
-    
-    print('Tree after removing %d:' % remove_value)
-    tree.remove(remove_value)
-    print(tree)
 
     # Search for a number.
     search_value = int(input("Enter a value to look for in the BST: "))
@@ -221,17 +254,33 @@ def main():
                         
                         break                    
                     
+                cont = contMenu()
+                    
+                    
+        #===============================================#
+        # OPTION 2:  Find a plane scheduled for time t. #
+        #===============================================#
+        
+        # If the user chooses option 2:
+        elif sent == 2:
+            
+            # Initialize the continuation value. (just for this option)
+            cont = 1
+            
+            # While the user wants to continue with the purchase:
+            while cont != 2:
+                
                 while True:
+                    
                     try:
-                        # Asking the player if he wants to purchase another item.
-                        cont = int(input("\nDo you want to add another plane?\n" + \
-                                     "1) Yes\n" + \
-                                     "2) No\n" + \
-                                     "Enter your choice:  "))
+                        # Print option label.
+                        print("\n |===============================================|"\
+                              "\n | OPTION 2:  Find a plane scheduled for time t. |"\
+                              "\n |===============================================|\n")
                         
-                        # If the user does not enter 1 or 2.
-                        if (cont < 0 or cont > 3):
-                            raise ValueError
+                        # Remove a node. Only need to send a "key" value to the remove method.
+                        remove_value = int(input('Enter value to remove: '))
+                        print()
                     
                     # If the user does not enter an int, display an error message.
                     except ValueError:
@@ -243,19 +292,16 @@ def main():
                         print("\nGeneral Error.")
                         
                     else:
-                        break
+                        
+                        print('Tree after removing %d:' % remove_value)
+                        tree.remove(remove_value)
+                        
+                        if DEBUG:
+                            print(tree)
+                        
+                        break                    
                     
-                    
-        #===============================================#
-        # OPTION 2:  Find a plane scheduled for time t. #
-        #===============================================#
-        
-        # If the user chooses option 2:
-        elif sent == 2:
-            
-            print("\n |===============================================|"\
-                  "\n | OPTION 2:  Find a plane scheduled for time t. |"\
-                  "\n |===============================================|\n")
+                cont = contMenu()
              
         #=================================================#
         # OPTION 3:  Remove a plane scheduled for time t. #
