@@ -279,15 +279,16 @@ def main():
                   "\n | OPTION 4:  Print the list of planes. |"\
                   "\n |======================================|\n")
             
-
+            if DEBUG:
+                print(tree)
             
             
         #==============================#
-        # OPTION 5:  Exit the program. #
+        # OPTION 0:  Exit the program. #
         #==============================#
         
-        # If the user chooses option 5:
-        elif sent == 5:
+        # If the user chooses option 0:
+        elif sent == 0:
             
             # Display a good-bye message and terminate the program.
             print("\nExiting Program.")
