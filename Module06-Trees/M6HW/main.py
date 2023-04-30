@@ -165,11 +165,33 @@ def main():
     # TODO: - Add timer and code to "land planes" (remove from tree) as the time increases.
     #       - Create a function to print the tree "in order".
     #       - Print tree at the start of each option so that the user knows the times.
+    #       - Add k = 3 provisions. (Ask the user for the value of k.) (Option 3)
+    #       - Add while loop for the user to input the planes one-at-a-time and check to see if
+    #         the planes have proper separation (k value).
 
 
     # Initialize the sentinel value to zero.
     sent = -1
     tree = BinarySearchTree()
+
+    while True:
+                    
+        try:
+            k = int(input("What should the plane separation time (the time between landings) be? \n" +\
+                  "(Please only use integers.)"))
+            k = 3
+                    
+        # If the user does not enter an int, display an error message.
+        except ValueError:
+                        
+            print("\nPlease input a valid integer value.")
+                    
+        # Catch-all general error.
+        except:
+            print("\nGeneral Error.")
+                        
+        else:                        
+            break
     
     # Input plane times.
     # user_values = input('Enter insert values with spaces between: ')
@@ -185,6 +207,8 @@ def main():
         print('Initial tree:')
         print(tree)
         print()
+
+    
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 5):
     while sent != 0:
