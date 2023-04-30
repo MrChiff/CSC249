@@ -162,6 +162,8 @@ def contMenu():
 def main():
 #=========#
 
+    # TODO: Add timer and code to "land planes" (remove from tree) as the time increases.
+
     # Initialize the sentinel value to zero.
     sent = -1
     tree = BinarySearchTree()
@@ -187,11 +189,7 @@ def main():
     # search_value = 94
     print()
 
-    if tree.search(search_value):
-        print("The node exists in the tree.")
-        
-    else:
-        print("Value not found.")
+    
     
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 5):
@@ -273,10 +271,6 @@ def main():
         #=================================================#
         # OPTION 3:  Remove a plane scheduled for time t. #
         #=================================================#
-
-        # TODO: - Make sure the node exists before moving on to printing the tree and 
-        #         "Tree after removing:". 
-        #           - use the raise ValueError in the contMenu() function.
         
         # If the user chooses option 3:
         elif sent == 3:
@@ -298,11 +292,17 @@ def main():
                         # Remove a node. Only need to send a "key" value to the remove method.
                         remove_value = int(input('Enter value to remove: '))
                         print()
+
+                        if tree.search(remove_value):
+                            print("The node exists in the tree.")
+                        else:
+                            print("Value not found.")
+                            raise ValueError
                     
                     # If the user does not enter an int, display an error message.
                     except ValueError:
                         
-                        print("\nPlease input a valid integer value.")
+                        print("\nPlease input a valid Node value.")
                     
                     # Catch-all general error.
                     except:
