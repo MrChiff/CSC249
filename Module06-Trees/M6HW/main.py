@@ -253,20 +253,52 @@ def main():
         # If the user chooses option 2:
         elif sent == 2:
             
-            print("\n |===============================================|"\
-                  "\n | OPTION 2:  Find a plane scheduled for time t. |"\
-                  "\n |===============================================|\n")
             
-            # Search for a number.
-            search_value = int(input("Enter a value to look for in the BST: "))
-            # search_value = 45
-            print()
 
-            if tree.search(search_value):
-                print("The node exists in the tree.\n")
-            else:
-                print("Value not found.\n")
+            # Initialize the continuation value. (just for this option)
+            cont = 1
             
+            # While the user wants to continue with the purchase:
+            while cont != 2:
+                
+                while True:
+                    
+                    try:
+                        # Print option label.
+                        print("\n |===============================================|"\
+                              "\n | OPTION 2:  Find a plane scheduled for time t. |"\
+                              "\n |===============================================|\n")
+            
+                        # Search for a number.
+                        search_value = int(input("Enter a value to look for in the BST: "))
+                        # search_value = 45
+                        print()
+
+                        if tree.search(search_value):
+                            print("The node exists in the tree.\n")
+                        else:
+                            print("Value not found.\n")
+                    
+                    # If the user does not enter an int, display an error message.
+                    except ValueError:
+                        
+                        print("\nPlease input a valid Node value.")
+                    
+                    # Catch-all general error.
+                    except:
+                        print("\nGeneral Error.")
+                        
+                    else:
+                        
+                        print('Tree after removing %d:' % remove_value)
+                        tree.remove(remove_value)
+                        
+                        if DEBUG:
+                            print(tree)
+                        
+                        break                    
+                    
+                cont = contMenu()
              
         #=================================================#
         # OPTION 3:  Remove a plane scheduled for time t. #
