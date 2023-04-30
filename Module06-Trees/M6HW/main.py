@@ -139,7 +139,7 @@ def contMenu():
                                      "Enter your choice:  "))
                         
                         # If the user does not enter 1 or 2.
-                        if (cont < 0 or cont > 3):
+                        if (cont < 1 or cont > 3):
                             raise ValueError
                     
                     # If the user does not enter an int, display an error message.
@@ -272,10 +272,13 @@ def main():
         #=================================================#
         # OPTION 3:  Remove a plane scheduled for time t. #
         #=================================================#
+
+        # TODO: Make sure the node exists before moving on to printing the tree and 
+        # "Tree after removing:". 
         
         # If the user chooses option 3:
         elif sent == 3:
-            
+
             # Initialize the continuation value. (just for this option)
             cont = 1
             
