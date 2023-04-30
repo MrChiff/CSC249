@@ -264,6 +264,18 @@ def main():
         # If the user chooses option 2:
         elif sent == 2:
             
+            print("\n |===============================================|"\
+                  "\n | OPTION 2:  Find a plane scheduled for time t. |"\
+                  "\n |===============================================|\n")
+            
+             
+        #=================================================#
+        # OPTION 3:  Remove a plane scheduled for time t. #
+        #=================================================#
+        
+        # If the user chooses option 3:
+        elif sent == 3:
+            
             # Initialize the continuation value. (just for this option)
             cont = 1
             
@@ -274,9 +286,9 @@ def main():
                     
                     try:
                         # Print option label.
-                        print("\n |===============================================|"\
-                              "\n | OPTION 2:  Find a plane scheduled for time t. |"\
-                              "\n |===============================================|\n")
+                        print("\n |=================================================|"\
+                              "\n | OPTION 3:  Remove a plane scheduled for time t. |"\
+                              "\n |=================================================|\n")
                         
                         # Remove a node. Only need to send a "key" value to the remove method.
                         remove_value = int(input('Enter value to remove: '))
@@ -302,17 +314,6 @@ def main():
                         break                    
                     
                 cont = contMenu()
-             
-        #=================================================#
-        # OPTION 3:  Remove a plane scheduled for time t. #
-        #=================================================#
-        
-        # If the user chooses option 3:
-        elif sent == 3:
-            
-            print("\n |=================================================|"\
-                  "\n | OPTION 3:  Remove a plane scheduled for time t. |"\
-                  "\n |=================================================|\n")
                             
         #======================================#
         # OPTION 4:  Print the list of planes. #
