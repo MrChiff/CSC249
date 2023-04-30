@@ -181,16 +181,7 @@ def main():
         print(tree)
         print()
 
-    # Search for a number.
-    search_value = int(input("Enter a value to look for in the BST: "))
-    # search_value = 45
-    print()
-
-    if tree.search(search_value):
-        print("The node exists in the tree.\n")
-        
-    else:
-        print("Value not found.\n")
+   
         
     search_value = int(input("Enter a value to look for in the BST: "))
     # search_value = 94
@@ -268,13 +259,24 @@ def main():
                   "\n | OPTION 2:  Find a plane scheduled for time t. |"\
                   "\n |===============================================|\n")
             
+            # Search for a number.
+            search_value = int(input("Enter a value to look for in the BST: "))
+            # search_value = 45
+            print()
+
+            if tree.search(search_value):
+                print("The node exists in the tree.\n")
+            else:
+                print("Value not found.\n")
+            
              
         #=================================================#
         # OPTION 3:  Remove a plane scheduled for time t. #
         #=================================================#
 
-        # TODO: Make sure the node exists before moving on to printing the tree and 
-        # "Tree after removing:". 
+        # TODO: - Make sure the node exists before moving on to printing the tree and 
+        #         "Tree after removing:". 
+        #           - use the raise ValueError in the contMenu() function.
         
         # If the user chooses option 3:
         elif sent == 3:
