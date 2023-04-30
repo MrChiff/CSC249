@@ -162,7 +162,10 @@ def contMenu():
 def main():
 #=========#
 
-    # TODO: Add timer and code to "land planes" (remove from tree) as the time increases.
+    # TODO: - Add timer and code to "land planes" (remove from tree) as the time increases.
+    #       - Create a function to print the tree "in order".
+    #       - Print tree at the start of each option so that the user knows the times.
+
 
     # Initialize the sentinel value to zero.
     sent = -1
@@ -182,15 +185,6 @@ def main():
         print('Initial tree:')
         print(tree)
         print()
-
-   
-        
-    search_value = int(input("Enter a value to look for in the BST: "))
-    # search_value = 94
-    print()
-
-    
-    
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 5):
     while sent != 0:
@@ -252,8 +246,6 @@ def main():
         
         # If the user chooses option 2:
         elif sent == 2:
-            
-            
 
             # Initialize the continuation value. (just for this option)
             cont = 1
@@ -289,9 +281,6 @@ def main():
                         print("\nGeneral Error.")
                         
                     else:
-                        
-                        print('Tree after removing %d:' % remove_value)
-                        tree.remove(remove_value)
                         
                         if DEBUG:
                             print(tree)
