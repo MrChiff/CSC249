@@ -80,7 +80,7 @@ def mainMenu():
                                "4) Print the list of planes.\n"\
                                "0) Exit the program.\n"\
                                "----------------------------------------\n"\
-                               "Enter your choice:\t"))
+                               "Enter your choice:  "))
                 
         # If the user does not enter an int, display an error message.
         except ValueError:
@@ -127,16 +127,19 @@ def main():
     tree = BinarySearchTree()
     
     # Input plane times.
-    user_values = input('Enter insert values with spaces between: ')
+    # user_values = input('Enter insert values with spaces between: ')
+    user_values = "15 8 72 13 1 0 45 38 42"
+    print("Planes:  ", user_values)
     print()
     
     for value in user_values.split():
         new_node = Node(int(value))
         tree.insert(new_node)
     
-    print('Initial tree:')
-    print(tree)
-    print()
+    if DEBUG:
+        print('Initial tree:')
+        print(tree)
+        print()
     
     remove_value = int(input('Enter value to remove: '))
     print()
@@ -223,7 +226,8 @@ def main():
                         # Asking the player if he wants to purchase another item.
                         cont = int(input("\nDo you want to add another plane?\n" + \
                                      "1) Yes\n" + \
-                                     "2) No\n"))
+                                     "2) No\n" + \
+                                     "Enter your choice:  "))
                         
                         # If the user does not enter 1 or 2.
                         if (cont < 0 or cont > 3):
@@ -242,9 +246,9 @@ def main():
                         break
                     
                     
-        #============================#
+        #===============================================#
         # OPTION 2:  Find a plane scheduled for time t. #
-        #============================#
+        #===============================================#
         
         # If the user chooses option 2:
         elif sent == 2:
