@@ -177,8 +177,9 @@ def main():
     while True:
                     
         try:
-            k = int(input("What should the plane separation time (the time between landings) be? \n" +\
-                  "(Please only use integers.)"))
+            k = int(input("What should the time between landings be? \n" +\
+                          "(Please only use integers.)\n" + \
+                          "k = "))
             k = 3
                     
         # If the user does not enter an int, display an error message.
