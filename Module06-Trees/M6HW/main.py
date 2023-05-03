@@ -48,13 +48,13 @@
 #===================================================================================================
 
 # Questions:
-# Do I allow the user to create the initial tree or should I hard code a tree for the user to 
-# manipulate?
-#
+
+
 
 # Main program to test Binary search tree.
 from Node import Node
 from BinarySearchTree import BinarySearchTree
+import datetime
 
 DEBUG = True;
 
@@ -156,6 +156,15 @@ def contMenu():
     
     return cont
 
+def landing(startTime, tree):
+    
+    currentTime = datetime.datetime.now()
+    
+    landingTime = currentTime - startTime
+    
+    tree.search(landingTime)
+    tree.remove(landingTime)
+
 
 
 #=========#
@@ -168,10 +177,17 @@ def main():
     #       - Add k = 3 provisions. (Ask the user for the value of k.) (Option 3)
     #       - Add while loop for the user to input the planes one-at-a-time and check to see if
     #         the planes have proper separation (k value).
-
+    #       - Do I allow the user to create the initial tree or should I hard code a tree for the  
+    #         user to manipulate?
+    #       - Do I put the numbers in order?
+    #       - If I allow the user to input the values one at a time I can check for k, but how do I  
+    #         do that if I allow the user to input all the values at once.
+    #       - How do I search for values less than the curent time? (I know how to search for a 
+    #         specific value.)
 
     # Initialize the sentinel value to zero.
     sent = -1
+    startTime = datetime.datetime.now()
     tree = BinarySearchTree()
 
     while True:
@@ -181,6 +197,7 @@ def main():
                           "(Please only use integers.)\n" + \
                           "k = "))
             k = 3
+            
                     
         # If the user does not enter an int, display an error message.
         except ValueError:
@@ -191,12 +208,36 @@ def main():
         except:
             print("\nGeneral Error.")
                         
-        else:                        
+        else:
             break
     
     # Input plane times.
-    # user_values = input('Enter insert values with spaces between: ')
-    user_values = "15 8 72 13 1 0 45 38 42"
+    
+    # while user_values != -1:
+        
+    #     try:
+    #         user_values = input('Enter values of plane landing times (-1 to exit): ')
+            
+            
+            
+    #         new_node = Node(int(user_value))
+    #         tree.insert(new_node)
+                    
+    #     # If the user does not enter an int, display an error message.
+    #     except ValueError:
+                        
+    #         print("\nPlease input a valid integer value.")
+                    
+    #     # Catch-all general error.
+    #     except:
+    #         print("\nGeneral Error.")
+                        
+    #     # else:
+    #     #     break
+
+    user_values = input('Enter values of plane landing times with spaces between each number: ')
+    # user_values = "15 8 72 13 1 0 45 38 42"
+    user_values = "5 10 16 23 37 42 49 54"
     print("Planes:  ", user_values)
     print()
     
