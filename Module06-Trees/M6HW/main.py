@@ -156,14 +156,15 @@ def contMenu():
     
     return cont
 
+#===========================#
 def landing(startTime, tree):
+#===========================#
     
     currentTime = datetime.datetime.now()
     
     landingTime = currentTime - startTime
     
-    tree.search(landingTime)
-    tree.remove(landingTime)
+    tree.timedRemoval(landingTime)
 
 
 
@@ -179,11 +180,12 @@ def main():
     #         the planes have proper separation (k value).
     #       - Do I allow the user to create the initial tree or should I hard code a tree for the  
     #         user to manipulate?
-    #       - Do I put the numbers in order?
+    #       - What if the planes are listed in order?
     #       - If I allow the user to input the values one at a time I can check for k, but how do I  
     #         do that if I allow the user to input all the values at once.
     #       - How do I search for values less than the curent time? (I know how to search for a 
     #         specific value.)
+    #       - Does k only come into effect when adding planes and not at the beginning?
 
     # Initialize the sentinel value to zero.
     sent = -1
@@ -193,9 +195,9 @@ def main():
     while True:
                     
         try:
-            k = int(input("What should the time between landings be? \n" +\
-                          "(Please only use integers.)\n" + \
-                          "k = "))
+            # k = int(input("What should the time between landings be? \n" +\
+            #               "(Please only use integers.)\n" + \
+            #               "k = "))
             k = 3
             
                     
@@ -235,9 +237,9 @@ def main():
     #     # else:
     #     #     break
 
-    user_values = input('Enter values of plane landing times with spaces between each number: ')
-    # user_values = "15 8 72 13 1 0 45 38 42"
-    user_values = "5 10 16 23 37 42 49 54"
+    # user_values = input('Enter values of plane landing times with spaces between each number: ')
+    user_values = "15 8 72 13 1 0 45 38 42"
+    # user_values = "5 10 16 23 37 42 49 54"
     print("Planes:  ", user_values)
     print()
     
@@ -249,6 +251,13 @@ def main():
         print('Initial tree:')
         print(tree)
         print()
+        
+    tree.printInorder()
+    
+    landing(startTime, tree)
+    
+    if DEBUG:
+        print(tree)
 
     
 

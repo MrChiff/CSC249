@@ -7,7 +7,9 @@ class Node:
         self.right = None
         
     def __repr__(self):
+        
         print("Node: " + str(self.key))
-        print("Left child: " + str(self.left))
-        print("Right child: " + str(self.right))
+            # print("Right child: " + str(self.right))
+            # print("Left child: " + str(self.left))
+       
     
