@@ -118,7 +118,8 @@ class BinarySearchTree:
             # L
             inorder(node.left)  
             # Cur
-            print(node.key)
+            # print(node)
+            print("Plane: ", node.key)
             # treeList.append(node.key)
             
             # R
@@ -170,7 +171,7 @@ class BinarySearchTree:
             
                 current_node = current_node.left
                 temp = current_node
-                print(temp)
+                print(temp.key)
                 
             # # Navigate to the right if the search key is
             # # greater than the node's key.

@@ -163,14 +163,16 @@ def landing(startTime, tree):
      # move to main and iterate in function and just use remove for all first 
      # nodes less than current time
     
-    currentTime = datetime.datetime.now()
+    # currentTime = datetime.datetime.now()
     
-    landingTime = currentTime - startTime
+    # landingTime = currentTime - startTime
+    
+    landingTime = startTime
     
     inorderList = tree.inorderList()
     
     while (inorderList[0] < landingTime):
-        tree.timedRemoval(inorderList[0])
+        tree.remove(inorderList[0])
         del inorderList[0]
     
     # return landingTime
@@ -185,83 +187,104 @@ def main():
     from Node import Node
     from BinarySearchTree import BinarySearchTree
     import datetime
+    import random
+    import decimal
 
     DEBUG = True;
 
-    # TODO: - Add timer and code to "land planes" (remove from tree) as the time increases.
-    #       - Create a function to print the tree "in order".
+    # TODO: - Work on datetime conversion to seconds or minutes.  Or just add funtionality to land
+    #         next plane and advance time to the time of the next plane (then remove the plane)
     #       - Print tree at the start of each option so that the user knows the times.
-    #       - Add k = 3 provisions. (Ask the user for the value of k.) (Option 3)
+    #       - Add k = 3 provisions. (Ask the user for the value of k.) (@ insert and initial tree
+    #         creation)
     #       - Add while loop for the user to input the planes one-at-a-time and check to see if
     #         the planes have proper separation (k value).
-    #       - Do I allow the user to create the initial tree or should I hard code a tree for the  
-    #         user to manipulate?
-    #       - What if the planes are listed in order?
-    #       - If I allow the user to input the values one at a time I can check for k, but how do I  
-    #         do that if I allow the user to input all the values at once.
-    #       - How do I search for values less than the curent time? (I know how to search for a 
-    #         specific value.)
-    #       - Does k only come into effect when adding planes and not at the beginning?
+    #       - Try a plane list inorder, random, reverse order to debug the program
 
     # Initialize the sentinel value to zero.
     sent = -1
     startTime = datetime.datetime.now()
     tree = BinarySearchTree()
 
-    while True:
-                    
-        try:
-            # k = int(input("What should the time between landings be? \n" +\
-            #               "(Please only use integers.)\n" + \
-            #               "k = "))
-            k = 3
-            
-                    
-        # If the user does not enter an int, display an error message.
-        except ValueError:
+    if DEBUG != True:
+        while True:
                         
-            print("\nPlease input a valid integer value.")
-                    
-        # Catch-all general error.
-        except:
-            print("\nGeneral Error.")
+            try:
+                k = int(input("What should the time between landings be? \n" +\
+                              "(Please only use integers.)\n" + \
+                              "k = "))
+                
+                
                         
-        else:
-            break
-    
-    # Input plane times.
-    
-    # while user_values != -1:
+            # If the user does not enter an int, display an error message.
+            except ValueError:
+                            
+                print("\nPlease input a valid integer value.")
+                        
+            # Catch-all general error.
+            except:
+                print("\nGeneral Error.")
+                            
+            else:
+                break
         
-    #     try:
-    #         user_values = input('Enter values of plane landing times (-1 to exit): ')
+        # Input plane times.
+    
+    
+        userList = []
+        while True:
             
-            
-            
-    #         new_node = Node(int(user_value))
-    #         tree.insert(new_node)
-                    
-    #     # If the user does not enter an int, display an error message.
-    #     except ValueError:
+            try:
+                i = 0
+                
+                user_value = float(input('Enter values of plane landing times (-1 to exit): '))
+                
+                if user_value == -1:
+                    break
+                
+                if userList is None:
+                    continue
+                else: 
+                    for i in range(len(userList)):
                         
-    #         print("\nPlease input a valid integer value.")
-                    
-    #     # Catch-all general error.
-    #     except:
-    #         print("\nGeneral Error.")
+                        if abs(user_value - userList[i]) < k:
+                            raise ValueError("The current plane is too close to the other planes you" + 
+                                             "have already entered.")
+                
+                userList.append(user_value)
+                new_node = Node(int(user_value))
+                tree.insert(new_node)
+                
+                i+=1
                         
-    #     # else:
-    #     #     break
-
-    # user_values = input('Enter values of plane landing times with spaces between each number: ')
-    user_values = "15 8 72 13 1 0 45 38 42"
-    # user_values = "5 10 16 23 37 42 49 54"
+            # If the user does not enter an int, display an error message.
+            except ValueError:
+                            
+                print("\nPlease input a valid integer value.")
+                        
+            # Catch-all general error.
+            except:
+                print("\nGeneral Error.")
+                
+                
+    # user_values = 15 8 72 13 1 0 45 38 42"
+    # user_values = 5 10 16 23 37 42 49 54"
+    user_values = []
+    for i in range(10):
+        user_values.append(round(random.uniform(0.0, 100.0), 2))
+        
+    
     print("Planes:  ", user_values)
     print()
     
+    k = 3
+    print("k = ", k)
+    print()
+    
+    
     # a list with input values
-    for value in user_values.split():
-        new_node = Node(int(value))
+    for value in user_values:
+        new_node = Node(value)
         tree.insert(new_node)
     
     if DEBUG:
@@ -269,15 +292,18 @@ def main():
         print(tree)
         print()
         
-    treeList = tree.printInorder()
-    print("Tree List: ", treeList)
-    print("Least value in tree: ", treeList[0])
+    tree.printInorder()
+    inorderList = tree.inorderList()
+    print("Tree List: ", inorderList)
+    print("Least value in tree: ", inorderList[0])
     
-    leastNode = tree.findSoonestPlane()
-    print(leastNode)
+    # leastNode = tree.findSoonestPlane()
+    # print(leastNode)
     
     # landing(startTime, tree)
-
+    landing(9, tree)
+    print(tree)
+    tree.printInorder()
     
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 5):
