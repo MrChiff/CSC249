@@ -8,7 +8,10 @@ class Node:
         
     def __repr__(self):
         
-        print("Node: " + str(self.key))
+        if self.key is None:
+            print("Empty")
+        else:
+            print("Node: " + str(self.key))
             # print("Right child: " + str(self.right))
             # print("Left child: " + str(self.left))
        

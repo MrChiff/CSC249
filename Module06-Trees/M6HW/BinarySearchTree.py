@@ -108,54 +108,77 @@ class BinarySearchTree:
                 
         return # Node not found
     
-    # def printInorder(self, node):
-    #     if node is None: 
-    #         return                   # "Ret" 
-        
-    #     printInorder(node.left)   # "L"  
-    #     print(node)                  # "Cur"
-    #     printInorder(node.right)  # "R"
-    #     print(node)
-        
     def printInorder(self):
+        # treeList = []
+        # helper function (closure)
+        def inorder(node):
+            if node is None:
+                return
+            
+            # L
+            inorder(node.left)  
+            # Cur
+            print(node.key)
+            # treeList.append(node.key)
+            
+            # R
+            inorder(node.right)
+            
+        # start recursion using the helper
+        inorder(self.root)
+        
+        # return treeList
+    
+    def inorderList(self):
+        
+        treeList = []
+        # helper function (closure)
+        def inorder(node):
+            if node is None:
+                return
+            
+            # L
+            inorder(node.left)  
+            # Cur
+            # print(node.key)
+            treeList.append(node.key)
+            
+            # R
+            inorder(node.right)
+            
+        # start recursion using the helper
+        inorder(self.root)
+        
+        return treeList
+        
+    def findSoonestPlane(self):
+        # # helper function (closure)
+        # def inorder(node):
+        #     if node is None:
+        #         return
+            
+        #     # L
+        #     inorder(node.left)  
+        #     # Cur
+        #     print(node.key)
+            
+        # # start recursion using the helper
+        # inorder(self.root)
         
         current_node = self.root
-        
         while current_node is not None:
             
-            if current_node.left is not None:
-                print(current_node.left)
-                
-            if current_node.key is not None:
-                print(current_node.key)    
-                
-            if current_node.right is not None:
-                print(current_node.right)
-                
-            current_node = current_node.left
-            
-        return 'done'
-        
-    def timedRemoval(self, desired_key):
-        current_node = self.root
-        while current_node is not None:
-            
-            
-            if current_node.key < desired_key:
-                remove(current_node.key)
-                
-            # Navigate to the left if the search key is
-            # less than the node's key.
-            if desired_key < current_node.key:
                 current_node = current_node.left
+                temp = current_node
+                print(temp)
                 
-            # Navigate to the right if the search key is
-            # greater than the node's key.
-            else:
-                current_node = current_node.right
+            # # Navigate to the right if the search key is
+            # # greater than the node's key.
+            # else:
+            #     current_node = current_node.right
       
         # The key was not found in the tree.
-        return None
+        return temp.key
       
     # Build a string representation of the tree by 
     # getting the string representation of the root.

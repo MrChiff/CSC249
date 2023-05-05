@@ -159,18 +159,34 @@ def contMenu():
 #===========================#
 def landing(startTime, tree):
 #===========================#
+
+     # move to main and iterate in function and just use remove for all first 
+     # nodes less than current time
     
     currentTime = datetime.datetime.now()
     
     landingTime = currentTime - startTime
     
-    tree.timedRemoval(landingTime)
+    inorderList = tree.inorderList()
+    
+    while (inorderList[0] < landingTime):
+        tree.timedRemoval(inorderList[0])
+        del inorderList[0]
+    
+    # return landingTime
 
 
 
 #=========#
 def main():
 #=========#
+
+    # Main program to test Binary search tree.
+    from Node import Node
+    from BinarySearchTree import BinarySearchTree
+    import datetime
+
+    DEBUG = True;
 
     # TODO: - Add timer and code to "land planes" (remove from tree) as the time increases.
     #       - Create a function to print the tree "in order".
@@ -243,6 +259,7 @@ def main():
     print("Planes:  ", user_values)
     print()
     
+    # a list with input values
     for value in user_values.split():
         new_node = Node(int(value))
         tree.insert(new_node)
@@ -252,12 +269,14 @@ def main():
         print(tree)
         print()
         
-    tree.printInorder()
+    treeList = tree.printInorder()
+    print("Tree List: ", treeList)
+    print("Least value in tree: ", treeList[0])
     
-    landing(startTime, tree)
+    leastNode = tree.findSoonestPlane()
+    print(leastNode)
     
-    if DEBUG:
-        print(tree)
+    # landing(startTime, tree)
 
     
 
