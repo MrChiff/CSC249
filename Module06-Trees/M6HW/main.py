@@ -54,7 +54,7 @@
 # Main program to test Binary search tree.
 from Node import Node
 from BinarySearchTree import BinarySearchTree
-import datetime
+import random
 
 DEBUG = True;
 
@@ -78,6 +78,7 @@ def mainMenu():
                                "2) Find a plane scheduled for time t.\n"\
                                "3) Remove a plane scheduled for time t.\n"\
                                "4) Print the list of planes.\n"\
+                               "5) Land the next plane.\n"\
                                "0) Exit the program.\n"\
                                "----------------------------------------\n"\
                                "Enter your choice:  "))
@@ -131,51 +132,49 @@ def contMenu():
     """
 
     while True:
-                    try:
-                        # Asking the player if he wants to purchase another item.
-                        cont = int(input("\nDo you want to add another plane?\n" + \
-                                     "1) Yes\n" + \
-                                     "2) No\n" + \
-                                     "Enter your choice:  "))
-                        
-                        # If the user does not enter 1 or 2.
-                        if (cont < 1 or cont > 3):
-                            raise ValueError
-                    
-                    # If the user does not enter an int, display an error message.
-                    except ValueError:
-                        
-                        print("\nPlease input a valid integer value.")
-                    
-                    # Catch-all general error.
-                    except:
-                        print("\nGeneral Error.")
-                        
-                    else:
-                        break
+        try:
+            # Asking the player if he wants to purchase another item.
+            cont = int(input("\nDo you want to add another plane?\n" + \
+                         "1) Yes\n" + \
+                         "2) No\n" + \
+                         "Enter your choice:  "))
+            
+            # If the user does not enter 1 or 2.
+            if (cont < 1 or cont > 3):
+                raise ValueError
+        
+        # If the user does not enter an int, display an error message.
+        except ValueError:
+            
+            print("\nPlease input a valid integer value.")
+        
+        # Catch-all general error.
+        except:
+            print("\nGeneral Error.")
+            
+        else:
+            break
     
     return cont
 
-#===========================#
-def landing(startTime, tree):
-#===========================#
+#=============================#
+def landing(landingTime, tree):
+#=============================#
 
      # move to main and iterate in function and just use remove for all first 
      # nodes less than current time
+        
+    # inorderList = tree.inorderList()
     
-    # currentTime = datetime.datetime.now()
-    
-    # landingTime = currentTime - startTime
-    
-    landingTime = startTime
-    
-    inorderList = tree.inorderList()
-    
-    while (inorderList[0] < landingTime):
-        tree.remove(inorderList[0])
-        del inorderList[0]
-    
-    # return landingTime
+    while (tree.inorderList()[0] < landingTime):
+        tree.remove(tree.inorderList()[0])
+        # del inorderList[0]
+
+#==========================#    
+def printLandingSched(tree):
+#==========================#
+
+    print("Landing Schedule: ", ', '.join(tree.inorderList()))
 
 
 
@@ -184,13 +183,6 @@ def main():
 #=========#
 
     # Main program to test Binary search tree.
-    from Node import Node
-    from BinarySearchTree import BinarySearchTree
-    import datetime
-    import random
-    import decimal
-
-    DEBUG = True;
 
     # TODO: - Work on datetime conversion to seconds or minutes.  Or just add funtionality to land
     #         next plane and advance time to the time of the next plane (then remove the plane)
@@ -203,14 +195,14 @@ def main():
 
     # Initialize the sentinel value to zero.
     sent = -1
-    startTime = datetime.datetime.now()
+    time = 0
     tree = BinarySearchTree()
 
     if DEBUG != True:
         while True:
                         
             try:
-                k = int(input("What should the time between landings be? \n" +\
+                k = float(input("What should the time between landings be? \n" +\
                               "(Please only use integers.)\n" + \
                               "k = "))
                 
@@ -274,7 +266,7 @@ def main():
         user_values.append(round(random.uniform(0.0, 100.0), 2))
         
     
-    print("Planes:  ", user_values)
+    print("\nLanding Schedule:  ", ', '.join(user_values))
     print()
     
     k = 3
@@ -292,18 +284,16 @@ def main():
         print(tree)
         print()
         
-    tree.printInorder()
-    inorderList = tree.inorderList()
-    print("Tree List: ", inorderList)
-    print("Least value in tree: ", inorderList[0])
+    # tree.printInorder()
+    # inorderList = tree.inorderList()
+    # print("Tree List: ", inorderList)
+    # print("Least value in tree: ", inorderList[0])
+        
     
-    # leastNode = tree.findSoonestPlane()
-    # print(leastNode)
+    # landing(9, tree)
+    # print(tree)
+    # tree.printInorder()
     
-    # landing(startTime, tree)
-    landing(9, tree)
-    print(tree)
-    tree.printInorder()
     
 
     # While the user wants to continue to use the program (the sentinel value is not equal to 5):
@@ -328,13 +318,14 @@ def main():
                 while True:
                     
                     try:
+                        printLandingSched(tree)
                         # Print option label.
                         print("\n |===================================|"\
                               "\n | OPTION 1:  Add a plane at time t. |"\
                               "\n |===================================|\n")
                         
                         # Insert a node. Must send a Node object to the insert method instead of a number.
-                        insert_value = int(input("Enter a value to insert into the tree: "))
+                        insert_value = float(input("Enter a value to insert into the tree: "))
                         # insert_value = 36
                         print()
                     
@@ -376,20 +367,16 @@ def main():
                 while True:
                     
                     try:
+                        printLandingSched(tree)
                         # Print option label.
                         print("\n |===============================================|"\
                               "\n | OPTION 2:  Find a plane scheduled for time t. |"\
                               "\n |===============================================|\n")
             
                         # Search for a number.
-                        search_value = int(input("Enter a value to look for in the BST: "))
+                        search_value = float(input("Enter a value to look for in the BST: "))
                         # search_value = 45
-                        print()
-
-                        if tree.search(search_value):
-                            print("The node exists in the tree.\n")
-                        else:
-                            print("Value not found.\n")
+                        print()                        
                     
                     # If the user does not enter an int, display an error message.
                     except ValueError:
@@ -401,6 +388,13 @@ def main():
                         print("\nGeneral Error.")
                         
                     else:
+                        
+                        if tree.search(search_value):
+                            print("The node exists in the tree.\n")
+                        else:
+                            print("Value not found.\n")
+                            
+                        printLandingSched(tree)
                         
                         if DEBUG:
                             print(tree)
@@ -425,13 +419,14 @@ def main():
                 while True:
                     
                     try:
+                        printLandingSched(tree)
                         # Print option label.
                         print("\n |=================================================|"\
                               "\n | OPTION 3:  Remove a plane scheduled for time t. |"\
                               "\n |=================================================|\n")
                         
                         # Remove a node. Only need to send a "key" value to the remove method.
-                        remove_value = int(input('Enter value to remove: '))
+                        remove_value = float(input('Enter value to remove: '))
                         print()
 
                         if tree.search(remove_value):
@@ -453,6 +448,7 @@ def main():
                         
                         print('Tree after removing %d:' % remove_value)
                         tree.remove(remove_value)
+                        printLandingSched(tree)
                         
                         if DEBUG:
                             print(tree)
@@ -474,7 +470,35 @@ def main():
             
             if DEBUG:
                 print(tree)
+                
+            printLandingSched(tree)
             
+            cont = contMenu()
+            
+        #=================================#
+        # OPTION 5:  Land the next plane. #
+        #=================================#
+        
+        # If the user chooses option 4:
+        elif sent == 5:
+            
+            print("\n |=================================|"\
+                  "\n | OPTION 5:  Land the next plane. |"\
+                  "\n |=================================|\n")
+            
+            if DEBUG:
+                print(tree)
+                
+            print("Current time: ", time)
+            printLandingSched(tree)
+            time = float(input("What time do you want to advance to?\t"))
+            
+            landing(time, tree)
+            
+            print("New time: ", time)
+            printLandingSched(tree)
+            
+            cont = contMenu()
             
         #==============================#
         # OPTION 0:  Exit the program. #
