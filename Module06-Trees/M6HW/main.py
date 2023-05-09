@@ -173,8 +173,11 @@ def landing(landingTime, tree):
 #==========================#    
 def printLandingSched(tree):
 #==========================#
-
-    print("Landing Schedule: ", ', '.join(tree.inorderList()))
+    
+    str_list = []
+    for value in tree.inorderList():
+        str_list.append(str(value))
+    print("Landing Schedule: ", ', '.join(str_list))
 
 
 
@@ -262,11 +265,13 @@ def main():
     # user_values = 15 8 72 13 1 0 45 38 42"
     # user_values = 5 10 16 23 37 42 49 54"
     user_values = []
+    user_string = []
     for i in range(10):
         user_values.append(round(random.uniform(0.0, 100.0), 2))
+        user_string.append(str(user_values[i]))
         
     
-    print("\nLanding Schedule:  ", ', '.join(user_values))
+    # print("\nLanding Schedule:  ", ', '.join(user_string))
     print()
     
     k = 3
@@ -293,6 +298,8 @@ def main():
     # landing(9, tree)
     # print(tree)
     # tree.printInorder()
+    
+    printLandingSched(tree)
     
     
 
@@ -491,11 +498,11 @@ def main():
                 
             print("Current time: ", time)
             printLandingSched(tree)
-            time = float(input("What time do you want to advance to?\t"))
+            time = float(input("\nWhat time do you want to advance to?\t"))
             
             landing(time, tree)
             
-            print("New time: ", time)
+            print("\nNew time: ", time)
             printLandingSched(tree)
             
             cont = contMenu()
