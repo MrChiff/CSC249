@@ -373,6 +373,7 @@ def main():
                     
                     try:
                         printLandingSched(tree)
+                        
                         # Print option label.
                         print("\n |===============================================|"\
                               "\n | OPTION 2:  Find a plane scheduled for time t. |"\
