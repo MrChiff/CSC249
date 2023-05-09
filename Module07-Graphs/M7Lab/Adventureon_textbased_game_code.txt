@@ -1,0 +1,83 @@
+﻿
+start_at = The_Coast
+
+## Defines locations in the world
+
+locations {
+   Hyrule_Castle : location "You are Hyrule Castle." ;
+   The_Swamp  : location "You are next to the Swamp. It gives the bog eternal stench a run for its money." ;
+   The_Coast : location "You are gazing out on to a beautiful ocean.";
+   Eastern_Temple : location "You are in at the Eastern Temple.";
+   Blue_Maiden : location "You are at the Village of the Blue Maiden.";
+   Lake_Hylia : location "You are at Lake Hylia. A beautiful waterfall rushes before you.";
+   Cave_Of_No_Return : location "You are at the entrance of a deep dark forboding cave. The Cave of No Return!!";
+   treasure_room : location "You are in a room of treasures." ;
+}
+
+# Defines things in the world (scenery cannot be carried)
+/*
+objects {
+   apple          : object  "an apple" msg="Delicious." at = "lakeside";
+   troll          : scenery "an enormous troll"  at = "outside_cave" msg="Hungry.";
+}*/
+   
+connections {
+
+   ## Connects locations together (bidirectional)
+   
+   from, direction, to = [
+      Hyrule_Castle, southeast, The_Swamp
+      The_Swamp, south, The_Coast
+      The_Swamp, east, Eastern_Temple
+      Eastern_Temple, east, Blue_Maiden
+      Eastern_Temple, northwest, Lake_Hylia
+      Lake_Hylia, west, Cave_Of_No_Return
+      Cave_Of_No_Return, southwest, Hyrule_Castle
+      
+   ]
+}
+/*
+barriers {
+
+   ## Blocks Access To Cave Whilst Troll Exists (with message)
+   
+   block_cave : block {
+      location           = treasure_room
+      message            = The troll is guarding the cave.
+      block_when_exists  = troll
+      show_blocked_exit  = true
+   }
+   
+} */
+
+## Print the objective when the game starts
+
+on_startup {
+   : print "Hyrule: The Short Journey." ;
+   : press_any_key ;
+   : clear_screen;
+   : print "Find the princess." ;
+   : press_any_key ;
+}
+
+## Execute this every time a player moves or redescribes a location
+
+on_describe {
+   : if (is_at "treasure_room" ) {
+      : print "CONGRATULATIONS YOU FOUND THE TREASURE. YOU WIN!" ;
+      : win_game ;
+   }
+}
+
+## Test VERB NOUN that the player types and executes conditional actions
+/*
+on_command {
+   : match "give apple"  {
+      : if (is_present "troll" && is_carried "apple") {
+         : print   "The troll eats the apple then wanders off." ;
+         : destroy "apple" ;
+         : destroy "troll" ;
+      }
+   }
+}*/
+
