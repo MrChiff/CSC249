@@ -47,16 +47,23 @@
 #             advances.
 #===================================================================================================
 
-# Questions:
+#======================#
+# I am trying for gold #
+#======================#
 
-
+try:
+    from IPython import get_ipython
+    get_ipython().magic('clear')
+    get_ipython().magic('reset -f')
+except:
+    pass
 
 # Main program to test Binary search tree.
 from Node import Node
 from BinarySearchTree import BinarySearchTree
 import random
 
-DEBUG = True;
+DEBUG = False;
 
 #=============#
 def mainMenu():
@@ -161,18 +168,25 @@ def contMenu():
 def landing(landingTime, tree):
 #=============================#
 
-     # move to main and iterate in function and just use remove for all first 
-     # nodes less than current time
-        
-    # inorderList = tree.inorderList()
-    
-    while (tree.inorderList()[0] < landingTime):
-        tree.remove(tree.inorderList()[0])
-        # del inorderList[0]
+     """
+     This function lands the planes that are set to land prior to a specified landingTime.
+     
+     inputs:  landingTime, tree
+     outputs: removal of particular nodes of the tree
+     """
+     while (tree.inorderList()[0] < landingTime): 
+         tree.remove(tree.inorderList()[0])
 
 #==========================#    
 def printLandingSched(tree):
 #==========================#
+
+    """
+    This function prints the landing times in order and on the same line.
+    
+    inputs:  tree
+    outputs:  none
+    """
     
     str_list = []
     for value in tree.inorderList():
@@ -180,13 +194,13 @@ def printLandingSched(tree):
     print("Landing Schedule: ", ', '.join(str_list))
 
 
-
+# %%
 #=========#
 def main():
 #=========#
-
+# %%
     # Main program to test Binary search tree.
-
+    
     # TODO: - Work on datetime conversion to seconds or minutes.  Or just add funtionality to land
     #         next plane and advance time to the time of the next plane (then remove the plane)
     #       - Print tree at the start of each option so that the user knows the times.
@@ -201,16 +215,14 @@ def main():
     time = 0
     tree = BinarySearchTree()
 
-    if DEBUG != True:
+    if DEBUG == False:
+        
         while True:
                         
             try:
                 k = float(input("What should the time between landings be? \n" +\
-                              "(Please only use integers.)\n" + \
                               "k = "))
-                
-                
-                        
+                          
             # If the user does not enter an int, display an error message.
             except ValueError:
                             
@@ -223,81 +235,81 @@ def main():
             else:
                 break
         
-        # Input plane times.
-    
-    
-        userList = []
+        # Input plane times.    
         while True:
             
             try:
-                i = 0
+                # i = 0
                 
-                user_value = float(input('Enter values of plane landing times (-1 to exit): '))
+                user_value = float(input('\nEnter values of plane landing times (-1 to exit): '))
+                print(user_value)
                 
-                if user_value == -1:
+                if user_value == -1.0:
                     break
                 
-                if userList is None:
-                    continue
-                else: 
-                    for i in range(len(userList)):
-                        
-                        if abs(user_value - userList[i]) < k:
-                            raise ValueError("The current plane is too close to the other planes you" + 
+                if tree.k_insert(Node(user_value), k) == False: 
+                    print("\nError:  The current plane is too close to the other planes you" + 
                                              "have already entered.")
-                
-                userList.append(user_value)
-                new_node = Node(int(user_value))
-                tree.insert(new_node)
-                
-                i+=1
+                else: 
+                    tree.k_insert(Node(user_value),k)
+                    printLandingSched(tree)
                         
             # If the user does not enter an int, display an error message.
             except ValueError:
                             
-                print("\nPlease input a valid integer value.")
+                print("\nPlease input a valid decimal value.")
                         
             # Catch-all general error.
             except:
                 print("\nGeneral Error.")
-                
-                
-    # user_values = 15 8 72 13 1 0 45 38 42"
-    # user_values = 5 10 16 23 37 42 49 54"
-    user_values = []
-    user_string = []
-    for i in range(10):
-        user_values.append(round(random.uniform(0.0, 100.0), 2))
-        user_string.append(str(user_values[i]))
+    
+    if DEBUG == True:
+        k = 3
+        print("k = ", k)
+        print() 
+        # user_values = [15,8, 72, 13, 1, 0, 45, 38 42
+        # user_values = 5 10 16 23 37 42 49 54
+        for i in range(10):
+            temp = round(random.uniform(0.0, 100.0), 2)
+            print(temp)
+            # Apply k proximity
+            if i == 0:
+                print("Before: ")
+                printLandingSched(tree)
+                tree.k_insert(Node(temp),k)
+                print("After: ")
+                printLandingSched(tree)
+            elif tree.k_insert(Node(temp), k):
+                print("Before: ")
+                printLandingSched(tree)
+                print("After: ")
+                printLandingSched(tree)
+            else:
+                print("False")
+    
+    printLandingSched(tree)        
+    print(tree)     
+            
+            
+# %%            
+            
+        
         
     
     # print("\nLanding Schedule:  ", ', '.join(user_string))
     print()
     
-    k = 3
-    print("k = ", k)
-    print()
     
     
-    # a list with input values
-    for value in user_values:
-        new_node = Node(value)
-        tree.insert(new_node)
+    # # a list with input values
+    # for value in user_values:
+    #     new_node = Node(value)
+    #     tree.insert(new_node)
     
     if DEBUG:
         print('Initial tree:')
         print(tree)
         print()
-        
-    # tree.printInorder()
-    # inorderList = tree.inorderList()
-    # print("Tree List: ", inorderList)
-    # print("Least value in tree: ", inorderList[0])
-        
-    
-    # landing(9, tree)
-    # print(tree)
-    # tree.printInorder()
     
     printLandingSched(tree)
     

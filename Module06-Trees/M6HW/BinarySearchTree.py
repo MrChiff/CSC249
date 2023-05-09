@@ -55,6 +55,37 @@ class BinarySearchTree:
                         current_node = None
                     else:
                         current_node = current_node.right       
+    
+    # Inserts the new node into the tree.
+    def k_insert(self, node, k):
+
+        # Check if the tree is empty
+        if self.root is None:
+            self.root = node
+        else:
+            current_node = self.root
+            while current_node is not None: 
+                if node.key <= current_node.key - k:
+                    # If there is no left child, add the new
+                    # node here; otherwise repeat from the
+                    # left child.
+                    if current_node.left is None:
+                        current_node.left = node
+                        current_node = None
+                    else:
+                        current_node = current_node.left
+                elif node.key >= current_node.key + k:
+                    # If there is no right child, add the new
+                    # node here; otherwise repeat from the
+                    # right child.
+                    if current_node.right is None:
+                        current_node.right = node
+                        current_node = None
+                    else:
+                        current_node = current_node.right  
+                else:
+                    return False
+            return True
    
     # Removes the node with the matching key from the tree.
     def remove(self, key):
