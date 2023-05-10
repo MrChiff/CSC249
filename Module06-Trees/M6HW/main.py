@@ -195,11 +195,11 @@ def printLandingSched(tree):
     print("\nLanding Schedule: ", ', '.join(str_list))
 
 
-# %%
+
 #=========#
 def main():
 #=========#
-# %%
+
     # Main program to test Binary search tree.
 
     # Initialize the sentinel value to zero.
